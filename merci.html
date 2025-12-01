@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merci ! - Mousso Massa</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Roboto', 'Open Sans', sans-serif;
+            background: #F8F8F8;
+            margin: 0;
+            padding: 0;
+        }
+        .thank-you-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #FF6600 0%, #FF8C42 100%);
+        }
+        .thank-you-card {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        .thank-you-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .thank-you h1 {
+            color: #FF6600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .thank-you p {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .btn-back {
+            background: #FF6600;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 10px;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background: #CC0000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            .thank-you-card {
+                padding: 40px 20px;
+            }
+            .thank-you h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="thank-you-card">
+            <div class="thank-you">
+                <div class="thank-you-icon">🎉</div>
+                <h1>Merci pour votre inscription !</h1>
+                <p>Votre participation a bien été enregistrée.</p>
+                <p>Nous vous contacterons très bientôt pour confirmer votre participation et vous donner plus de détails sur l'événement.</p>
+                <p><strong>#MoussoMassa2025 — Leadership • Impact • Solidarité</strong></p>
+                
+                <a href="index.html" class="btn-back">Retour à l'accueil</a>
+                
+                <div class="footer-note">
+                    <p>Pour toute question, contactez-nous :<br>
+                    +225 07 09 00 23 80 • +225 05 45 77 10 10</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

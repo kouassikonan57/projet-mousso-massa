@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grande Marche — Mousso Massa 2025</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Oswald:wght@400;600&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo-origin.jpg">
+
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mousso Massa">
+    <meta property="og:title" content="Mousso Massa — Mobilisation pour le don de sang">
+    <meta property="og:description"
+        content="Mousso Massa 2025 — Grande marche & collecte de sang à San Pedro. Rejoignez-nous pour marcher, sensibiliser et sauver des vies.">
+    <meta property="og:url" content="index.html">
+    <meta property="og:image" content="assets/images/logo-origin.jpg">
+    <meta property="og:image:alt"
+        content="Logo Mousso Massa — portrait d'une volontaire tenant un flacon de sang, entourée d'un badge vert avec coeurs ivoiriens.">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MoussoMassa">
+    <meta name="twitter:title" content="Mousso Massa — Mobilisation pour le don de sang">
+    <meta name="twitter:description"
+        content="Grande marche et collecte de sang à San Pedro. Rejoignez Mousso Massa pour sauver des vies — Samedi 06 Décembre.">
+    <meta name="twitter:image" content="assets/images/logo-origin.jpg">
+    <meta name="twitter:image:alt"
+        content="Logo Mousso Massa — portrait d'une volontaire tenant un flacon de sang, entourée d'un badge vert avec coeurs ivoiriens.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-main">
+    <!-- PRELOADER / ÉCRAN DE CHARGEMENT -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <!-- Logo de l'entreprise -->
+            <div class="preloader-logo">
+                <img src="assets/images/logo-origin.jpg" alt="Logo Mousso Massa" class="preloader-img">
+            </div>
+
+            <!-- Texte de chargement -->
+            <div class="preloader-text">
+                <h2 class="preloader-title">MOUSSO MASSA</h2>
+                <p class="preloader-subtitle">Leadership • Impact • Solidarité</p>
+            </div>
+
+            <!-- Animation de chargement -->
+            <div class="preloader-spinner"></div>
+
+            <!-- Message -->
+            <p class="preloader-message">Chargement...</p>
+        </div>
+    </div>
+    <!-- Header / Navbar -->
+    <header class="header">
+        <!-- Topbar contact -->
+        <div class="topbar">
+            <div class="container">
+                <div class="contact-info">
+                    <span>Contact</span>
+                    <a href="tel:+2250709002380" class="phone-link" aria-label="Appeler organisatrice 1">+225 07 09 00
+                        23 80</a>
+                    <a href="tel:+2250545771010" class="phone-link" aria-label="Appeler organisatrice 2">+225 05 45 77
+                        10 10</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="navbar">
+                <div class="logo-section">
+                    <a href="#home" class="logo-link" aria-label="Accueil Mousso Massa">
+                        <div class="brand-badge">
+                            <img src="assets/images/logo-origin.jpg" alt="Logo Mousso Massa 2" class="logo-img">
+                        </div>
+                        <div class="logo-text">
+                            <span class="forum-text">Forum</span>
+                            <span class="mousso-text">MOUSSO MASSA <span class="superscript">2</span></span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop nav -->
+                <nav class="desktop-nav">
+                    <a href="#home" class="nav-link">Accueil</a>
+                    <a href="#marche" class="nav-link">La Marche</a>
+                    <a href="#don" class="nav-link accent-link">Don de Sang</a>
+                    <a href="#programme" class="nav-link">Programme</a>
+                    <a href="#partenaires" class="nav-link">Partenaires</a>
+                    <button id="openRegister" class="btn-primary" aria-haspopup="dialog">
+                        JE ME MOBILISE
+                    </button>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="mobile-menu-btn">
+                    <button id="mobileBtn" aria-label="Ouvrir le menu" class="menu-toggle">
+                        <svg id="mobileIcon" xmlns="http://www.w3.org/2000/svg" class="menu-icon" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile panel -->
+        <div id="mobilePanel" class="mobile-panel">
+            <div class="panel-content">
+                <a href="#home" class="mobile-nav-link">Accueil</a>
+                <a href="#marche" class="mobile-nav-link">La Marche</a>
+                <a href="#don" class="mobile-nav-link accent-link">Don de Sang</a>
+                <a href="#programme" class="mobile-nav-link">Programme</a>
+                <a href="#partenaires" class="mobile-nav-link">Partenaires</a>
+                <button id="openRegisterMobile" class="btn-primary mobile">
+                    JE ME MOBILISE
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- HERO -->
+        <section id="home" class="hero-section">
+            <div class="hero-bg">
+                <div class="hero-overlay"></div>
+
+                <div class="container hero-container">
+                    <div class="hero-content">
+                        <p class="hero-tag">
+                            #MoussoMassa2025
+                        </p>
+
+                        <h1 class="hero-title">
+                            Elles sont Connues.
+                            <span class="hero-highlight">Elles sont là.</span>
+                        </h1>
+
+                        <p class="hero-description">
+                            GRANDE MARCHE DE MOBILISATION POUR LE DON DE SANG —
+                            <strong>Samedi 06 Décembre • San Pedro</strong>. Rejoignez-nous pour marcher, sensibiliser
+                            et sauver des vies.
+                        </p>
+
+                        <div class="hero-buttons">
+                            <a href="#don" class="btn-accent" title="Je donne mon sang">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 21s8-4.5 8-10a8 8 0 1 0-16 0c0 5.5 8 10 8 10z" stroke-width="1.5" />
+                                </svg>
+                                J'AI LA FORCE. JE DONNE
+                            </a>
+
+                            <button id="ctaRegister" class="btn-secondary">
+                                JE PARTICIPE À LA MARCHE
+                            </button>
+                        </div>
+
+                        <p class="hero-motto">
+                            Leadership • Impact • Solidarité
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- "Elles Sont Là" -->
+        <section id="elles" class="section elles-section">
+            <div class="container">
+                <div class="grid-container">
+                    <div class="text-content">
+                        <h2 class="section-title">
+                            Mousso Massa : Le Mouvement
+                        </h2>
+                        <p class="section-text">
+                            Mousso Massa unit les femmes autour du leadership, de l'impact
+                            et de la solidarité. Notre mission : mobiliser les citoyennes
+                            pour sauver des vies grâce au don de sang et soutenir les
+                            actions locales à San Pedro.
+                        </p>
+                        <blockquote class="quote">
+                            <p class="quote-text">
+                                « Elles sont Connues. Elles sont là. »
+                            </p>
+                            <p class="quote-author">
+                                Un slogan qui incarne présence, pouvoir collectif et
+                                responsabilité sociale.
+                            </p>
+                        </blockquote>
+
+                        <div class="button-group">
+                            <a href="#programme" class="btn-primary small">Voir le programme</a>
+                            <a href="#partenaires" class="btn-outline small">Devenir partenaire</a>
+                        </div>
+                    </div>
+
+                    <!-- Portrait row -->
+                    <div class="image-grid">
+                        <img src="assets/images/img-1.png" alt="Portrait participante 1" class="portrait-img">
+                        <img src="assets/images/img-2.png" alt="Portrait participante 2" class="portrait-img">
+                        <img src="assets/images/img-3.png" alt="Portrait participante 3" class="portrait-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- La Marche -->
+        <section id="marche" class="section marche-section">
+            <div class="container">
+                <div class="grid-container">
+                    <div class="text-content">
+                        <h2 class="section-title">
+                            La Marche de la Solidarité à San Pedro
+                        </h2>
+                        <p class="section-text">
+                            Rendez-vous le <strong>Samedi 06 Décembre</strong>. Venez
+                            marcher pour la vie, sensibiliser et encourager le don de sang.
+                            Ensemble, nous faisons la différence.
+                        </p>
+
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <div class="item-content">
+                                    <div class="item-bullet"></div>
+                                    <div class="item-text">
+                                        <strong>Heures :</strong>
+                                        Collecte et marche à partir de <strong>06h00</strong> •
+                                        Conférence à <strong>15h00</strong> • Dîner gala à
+                                        <strong>20h00</strong>.
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="info-item">
+                                <div class="item-content">
+                                    <div class="item-bullet"></div>
+                                    <div class="item-text">
+                                        <strong>Lieu :</strong> Hôtel Sophia, San Pedro.
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="info-item">
+                                <div class="item-content">
+                                    <div class="item-bullet"></div>
+                                    <div class="item-text">
+                                        <strong>Activités principales :</strong> Collecte de sang,
+                                        marche sportive, conférence et dîner gala des Moussos
+                                        Massa.
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="button-group">
+                            <a href="#don" class="btn-accent small">
+                                Voir le point de don
+                            </a>
+                            <a href="#programme" class="btn-outline small">Programme complet</a>
+                        </div>
+                    </div>
+
+                    <div class="image-content">
+                        <div class="image-wrapper">
+                            <img src="assets/images/foul-air-sang.png" alt="Vue aérienne de la marche"
+                                class="feature-img">
+                        </div>
+                        <p class="image-caption">
+                            Un geste visible — Le don au cœur de la mobilisation
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Simple map placeholder -->
+                <div class="map-container">
+                    <h3 class="map-title">Itinéraire rapide</h3>
+                    <p class="map-subtitle">
+                        Hôtel Sophia, San Pedro, Cote d'Ivoire
+                    </p>
+                    <div class="map-placeholder">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.2218557858755!2d-6.627185299999999!3d4.7314850999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf96130418255eab%3A0x73da75f0de0d92f!2sH%C3%B4tel%20Sophia%20San%20Pedro!5e0!3m2!1sfr!2sci!4v1761312623270!5m2!1sfr!2sci"
+                            width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Don de sang -->
+        <section id="don" class="section don-section">
+            <div class="container">
+                <div class="flex-container">
+                    <div class="text-half">
+                        <h2 class="section-title accent-title">
+                            Un Geste, Une Vie : Le Don de Sang
+                        </h2>
+                        <p class="section-text">
+                            Le don de sang sauve des vies. Le Centre National de Transfusion
+                            Sanguine (CNTS) sera présent pour collecter les dons. Les femmes
+                            mobilisées aideront à sensibiliser et faciliter la collecte.
+                        </p>
+
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <div class="item-content">
+                                    <div class="item-bullet"></div>
+                                    <div class="item-text">
+                                        <strong>Conditions pratiques</strong> : 18-65 ans, poids
+                                        minimum requis, bonne santé le jour du don (se référer au
+                                        CNTS pour détails).
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="info-item">
+                                <div class="item-content">
+                                    <div class="item-bullet"></div>
+                                    <div class="item-text">
+                                        <strong>Lieu</strong> : Tente CNTS à l'arrivée de la
+                                        marche (Place C).
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="button-group">
+                            <button id="openRegister-1" class="btn-accent small">JE DONNE MON SANG</button>
+                            <button id="moreDonInfo" class="btn-outline small">Infos CNTS</button>
+                        </div>
+                    </div>
+
+                    <div class="image-half">
+                        <div class="image-wrapper">
+                            <img src="assets/images/distribution-sang-air.png" alt="Tente de don de sang"
+                                class="feature-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programme -->
+        <section id="programme" class="section programme-section">
+            <div class="container narrow">
+                <h2 class="section-title center">
+                    Programme du Samedi 06 Décembre — Hôtel Sophia, San Pedro
+                </h2>
+
+                <ol class="programme-list">
+                    <li class="programme-item">
+                        <div class="time-badge">
+                            06h00
+                        </div>
+                        <div class="programme-content">
+                            <h4 class="programme-time-title">Collecte de sang</h4>
+                            <p class="programme-description">
+                                Démarrage de la collecte de sang sur le site de l'Hôtel
+                                Sophia, organisée par le CNTS.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="programme-item">
+                        <div class="time-badge">
+                            06h00
+                        </div>
+                        <div class="programme-content">
+                            <h4 class="programme-time-title">Marche sportive</h4>
+                            <p class="programme-description">
+                                Grande marche de mobilisation pour le don de sang — départ
+                                depuis l'Hôtel Sophia.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="programme-item">
+                        <div class="time-badge">
+                            15h00
+                        </div>
+                        <div class="programme-content">
+                            <h4 class="programme-time-title">Conférence</h4>
+                            <p class="programme-description">
+                                Espace d'échanges et de sensibilisation autour du leadership
+                                féminin et du don de sang.
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="programme-item">
+                        <div class="time-badge">
+                            20h00
+                        </div>
+                        <div class="programme-content">
+                            <h4 class="programme-time-title">Dîner gala des Moussos Massa</h4>
+                            <p class="programme-description">
+                                Soirée de clôture officielle — musique, témoignages et remise
+                                de distinctions.
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Partenaires -->
+        <section id="partenaires" class="section partenaires-section">
+            <div class="container">
+                <h2 class="section-title center">
+                    Nos Alliés pour l'Impact
+                </h2>
+                <p class="section-subtitle center">
+                    Merci à nos partenaires qui rendent cette action possible.
+                </p>
+
+                <div class="partners-grid">
+                    <div class="partner-logo">
+                        <img src="assets/images/partenaire-1.jpg" alt="Forum Mousso Massa 2" class="logo-img">
+                    </div>
+
+                    <div class="partner-logo">
+                        <img src="assets/images/partenaire-2.jpg" alt="CNTS" class="logo-img">
+                    </div>
+                </div>
+
+                <div class="center-button">
+                    <button id="openRegister-2" class="btn-outline">
+                        Devenir Partenaire
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-container">
+                <div class="footer-info">
+                    <strong>don de sang • Samedi 06 Décembre • San Pedro</strong>
+                    <div class="footer-tagline">
+                        #MoussoMassa2025 — Leadership • Impact • Solidarité
+                    </div>
+                </div>
+
+                <div class="footer-nav">
+                    <nav class="footer-links">
+                        <a href="#home" class="footer-link">Accueil</a>
+                        <a href="#don" class="footer-link accent-link">Don de Sang</a>
+                        <a href="#partenaires" class="footer-link">Partenaires</a>
+                    </nav>
+                </div>
+
+                <div class="footer-contact">
+                    <div class="contact-items">
+                        <!-- Téléphone 1 -->
+                        <a href="tel:+225709002380" class="contact-item" aria-label="Appeler 070 900 2380">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path
+                                    d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 3 4.11 1 1 0 0 1 4 3h4.09a1 1 0 0 1 1 .75c.12.68.27 1.36.46 2.01a1 1 0 0 1-.24 1l-1.7 1.7a15 15 0 0 0 6.6 6.6l1.7-1.7a1 1 0 0 1 1-.24c.65.19 1.33.34 2.01.46a1 1 0 0 1 .75 1V22z"
+                                    stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <span class="contact-text">+225 07 09 00 23 80</span>
+                        </a>
+
+                        <!-- Téléphone 2 / WhatsApp -->
+                        <a href="tel:+225545771010" class="contact-item" aria-label="Appeler 054 577 1010">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path
+                                    d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 3 4.11 1 1 0 0 1 4 3h4.09a1 1 0 0 1 1 .75c.12.68.27 1.36.46 2.01a1 1 0 0 1-.24 1l-1.7 1.7a15 15 0 0 0 6.6 6.6l1.7-1.7a1 1 0 0 1 1-.24c.65.19 1.33.34 2.01.46a1 1 0 0 1 .75 1V22z"
+                                    stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <span class="contact-text">+225 05 45 77 10 10</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-copyright">
+                SIGMA STUDIO &copy; 2025. Tous droits réservés.
+            </div>
+        </footer>
+    </main>
+
+    <!-- REGISTER / PARTICIPATION MODAL -->
+    <div id="registerModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Je me mobilise — Inscription</h3>
+                <button id="closeModal" class="modal-close" aria-label="Fermer la fenêtre">
+                    ✕
+                </button>
+            </div>
+
+            <form action="submit.php" method="POST" class="modal-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Nom complet</label>
+                        <input type="text" name="name" class="form-input" placeholder="Prénom Nom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Téléphone</label>
+                        <input type="tel" name="phone" class="form-input" placeholder="+225 ..." required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-input" placeholder="email@exemple.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Je participe en tant que</label>
+                        <select name="role" class="form-select" required>
+                            <option value="participant">Participant / Donneur</option>
+                            <option value="benevole">Bénévole</option>
+                            <option value="partenaire">Partenaire</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input id="consent" name="consent" type="checkbox" checked class="checkbox" required>
+                    <label for="consent" class="checkbox-label">J'accepte que mes informations soient utilisées pour
+                        l'organisation de l'événement.</label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="cancelRegister" class="btn-outline">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        S'inscrire
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Small back-to-top -->
+    <button id="toTop" class="back-to-top" aria-label="Remonter">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="arrow-up">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+        </svg>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
