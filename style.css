@@ -839,6 +839,29 @@ button {
     padding: var(--space-xl) var(--space-md);
 }
 
+.footer .copyright {
+  padding: 25px 0;
+  border-top: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.footer .copyright p {
+  margin-bottom: 0;
+}
+.footer .copyright a {
+  color: #ff4a17;
+  transition: 0.3s;
+}
+
+.footer .credits {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.text-center{
+    text-align: center !important;
+}
+
 @media (min-width: 768px) {
     .footer-container {
         flex-direction: row;
@@ -1069,11 +1092,12 @@ button {
     display: flex;
 }
 
-.arrow-up {
-    width: 1.75rem;
-    height: 1.75rem;
-    font-weight: 700;
+.back-to-top .arrow-up {
+    font-size: 13px !important; /* TAILLE DE LA FLÈCHE */
+    color: #ffffff !important;
+    font-weight: bold;
 }
+
 
 /* Focus styles */
 :focus {
