@@ -291,10 +291,13 @@ button {
 /* Hero section */
 .hero-section {
     position: relative;
+    margin-top: 0; /* Assure qu'il n'y a pas de marge */
+    padding-top: 0px; /* Assure qu'il n'y a pas de padding */
 }
 
 .hero-bg {
-    height: 72vh;
+    height: calc(100vh - 80px); /* Ajuste la hauteur pour tenir compte du header */
+    min-height: 600px; /* Hauteur minimale pour les grands écrans */
     width: 100%;
     background-size: cover;
     background-position: center;
@@ -304,6 +307,8 @@ button {
             rgba(255, 255, 255, 0.6) 70%),
         url('assets/images/marche-plein-air.png');
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 @media (min-width: 768px) {
@@ -1226,4 +1231,743 @@ button {
 @keyframes fadeInContent {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* Nouveaux styles pour la version ONG */
+.activity-card {
+    text-align: center;
+}
+
+.activity-title {
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.partner-name {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+}
+
+.footer-tagline {
+    margin-top: var(--space-sm);
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* GALERIE D'IMAGES SUPPLEMENTAIRES */
+.medias-supplementaires {
+    margin-top: var(--space-xl);
+    padding: var(--space-xl) 0;
+    background: var(--white);
+    border-top: 1px solid var(--gray-100);
+}
+
+.medias-container {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.medias-section {
+    margin-bottom: var(--space-2xl);
+}
+
+.medias-title {
+    color: var(--primary);
+    margin-bottom: var(--space-lg);
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: var(--space-sm);
+}
+
+.medias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-md);
+}
+
+.media-item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 3px 10px var(--shadow);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    height: 150px;
+}
+
+.media-item:hover {
+    transform: translateY(-5px);
+}
+
+.media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media-video {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    background: var(--black);
+}
+
+.video-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+    font-size: 2rem;
+    background: rgba(0,0,0,0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: var(--white);
+    padding: var(--space-sm);
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.media-item:hover .media-caption {
+    opacity: 1;
+}
+
+/* Modal pour médias (identique à précédent mais ajouté ici pour être sûr) */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.image-modal.active {
+    display: flex;
+}
+
+.modal-image {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: var(--radius-md);
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+/* Événement Lakota */
+.lakota-event {
+    background: linear-gradient(135deg, var(--primary) 0%, #FF8C42 100%);
+    color: var(--white);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-xl);
+    text-align: center;
+}
+
+.lakota-title {
+    font-size: 1.8rem;
+    margin-bottom: var(--space-md);
+}
+
+.lakota-date {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-lg);
+    background: rgba(255,255,255,0.2);
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-full);
+}
+
+/* Correction partenaires */
+.partners-grid {
+    grid-template-columns: repeat(2, 1fr); /* Seulement 2 partenaires */
+}
+
+.partner-logo {
+    flex-direction: column;
+    text-align: center;
+}
+
+.partner-name {
+    display: none; /* Cache le texte si pas fourni */
+}
+
+@media (min-width: 768px) {
+    .medias-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    
+    .media-item, .media-video {
+        height: 180px;
+    }
+}
+
+/* CORRECTIONS AMÉLIORÉES POUR LAKOTA */
+
+/* 1. Réduction de la hauteur de la section Lakota */
+.lakota-event {
+    text-align: center;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, #FF6600 0%, #FF8C42 100%);
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    min-height: auto; /* Supprime la hauteur minimale fixe */
+}
+
+/* 2. Animation plus attrayante */
+@keyframes shine {
+    0% {
+        background-position: -100px;
+    }
+    100% {
+        background-position: 200px;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes colorChange {
+    0%, 100% {
+        background: linear-gradient(135deg, #FF6600 0%, #FF8C42 100%);
+    }
+    50% {
+        background: linear-gradient(135deg, #FF8C42 0%, #FF6600 100%);
+    }
+}
+
+.lakota-event {
+    animation: colorChange 8s infinite alternate;
+    position: relative;
+}
+
+/* Effet de brillance */
+.lakota-event::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+    );
+    transform: rotate(30deg);
+    animation: shine 3s infinite;
+}
+
+/* 3. Titre avec animation */
+.lakota-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+/* 4. Date avec animation */
+.lakota-date {
+    font-size: 1.4rem;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+    animation: float 3s ease-in-out infinite 0.5s;
+}
+
+/* 5. Texte descriptif */
+.lakota-event p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+    background: rgba(0,0,0,0.1);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* 6. Conteneur image plus compact */
+.lakota-event .medias-grid {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.lakota-event .media-item {
+    width: 280px; /* Légèrement réduit */
+    height: 420px; /* Ratio maintenu mais réduit */
+    max-width: 90%;
+    animation: float 4s ease-in-out infinite 1s;
+}
+
+.lakota-event .media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 3px solid white;
+}
+
+/* 7. Bouton d'alerte stylisé */
+.lakota-alert-btn {
+    background: white;
+    color: #FF6600;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+}
+
+.lakota-alert-btn:hover {
+    background: #FF6600;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(255,102,0,0.4);
+}
+
+.lakota-alert-btn i {
+    font-size: 1.2rem;
+}
+
+/* 8. Étoiles décoratives */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite;
+    z-index: 1;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Position des étoiles */
+.star:nth-child(1) { top: 20px; left: 20px; width: 10px; height: 10px; animation-delay: 0s; }
+.star:nth-child(2) { top: 40px; right: 30px; width: 8px; height: 8px; animation-delay: 0.5s; }
+.star:nth-child(3) { bottom: 60px; left: 15%; width: 12px; height: 12px; animation-delay: 1s; }
+.star:nth-child(4) { bottom: 30px; right: 15%; width: 6px; height: 6px; animation-delay: 1.5s; }
+.star:nth-child(5) { top: 60px; left: 40%; width: 9px; height: 9px; animation-delay: 2s; }
+
+/* 9. Responsive */
+@media (max-width: 768px) {
+    .lakota-event {
+        padding: 20px 15px;
+    }
+    
+    .lakota-title {
+        font-size: 1.6rem;
+    }
+    
+    .lakota-date {
+        font-size: 1.2rem;
+        padding: 8px 20px;
+    }
+    
+    .lakota-event p {
+        font-size: 1rem;
+        padding: 12px;
+    }
+    
+    .lakota-event .media-item {
+        width: 250px;
+        height: 375px;
+    }
+    
+    .lakota-alert-btn {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 10. Supprime l'animation pulse globale sur .lakota-event */
+.lakota-event {
+    animation: colorChange 8s infinite alternate;
+}
+
+/* Styles pour les modaux supplémentaires */
+.lakota-modal .modal-content,
+.guest-modal .modal-content {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Champs de textearea */
+textarea.form-input {
+    min-height: 100px;
+    resize: vertical;
+    font-family: var(--font-body);
+}
+
+/* Style spécifique pour le formulaire invitéé */
+.guest-modal .form-group textarea {
+    min-height: 120px;
+}
+
+/* Styles pour les modaux avec scroll */
+.modal-form-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--gray-100);
+}
+
+.modal-form-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-form-container::-webkit-scrollbar-track {
+    background: var(--gray-100);
+    border-radius: 3px;
+}
+
+.modal-form-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 3px;
+}
+
+/* Assure que le modal reste dans l'écran */
+@media (max-height: 700px) {
+    .modal-content {
+        max-height: 90vh !important;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .modal-form-container {
+        max-height: calc(90vh - 140px) !important;
+    }
+}
+
+/* Pour mobile */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95% !important;
+        max-height: 90vh !important;
+        margin: 10px auto !important;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .modal-form-container {
+        padding: 0 15px !important;
+    }
+    
+    .form-actions {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .form-actions button {
+        width: 100% !important;
+    }
+}
+
+/* PAGINATION STYLES */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0 30px;
+    padding: 15px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 10px var(--shadow-soft);
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: var(--accent);
+    transform: translateY(-2px);
+}
+
+.pagination-btn:disabled {
+    background: var(--gray-200);
+    color: var(--text-lighter);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.page-indicator {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    min-width: 120px;
+    text-align: center;
+}
+
+.page-indicator span {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Page numbers */
+.page-numbers {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.page-number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--white);
+    color: var(--text-main);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 5px var(--shadow-soft);
+}
+
+.page-number:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.page-number.active {
+    background: var(--primary);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.page-number.dots {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    cursor: default;
+    width: 20px;
+}
+
+.page-number.dots:hover {
+    background: transparent;
+    color: var(--text-main);
+    transform: none;
+}
+
+/* Image counter */
+.image-counter {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 10px;
+    grid-column: 1 / -1;
+    padding: 10px;
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+}
+
+/* Pour la galerie spécifique au forum */
+.forum-gallery-section .medias-grid {
+    min-height: 500px;
+}
+
+/* Loading state */
+.gallery-loading {
+    text-align: center;
+    padding: 40px;
+    grid-column: 1 / -1;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--gray-200);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    animation: spin 1s linear infinite;
+}
+
+/* Responsive pagination */
+@media (max-width: 768px) {
+    .pagination-controls {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 10px;
+    }
+    
+    .pagination-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .page-numbers {
+        gap: 5px;
+    }
+    
+    .page-number {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .medias-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
+    }
+}
+
+/* Section galerie forum spécifique */
+#forum-gallery {
+    scroll-margin-top: 100px;
+}
+
+#forum-gallery .pagination-controls {
+    position: sticky;
+    top: 80px;
+    z-index: 10;
+    margin-top: 0;
+}
+
+/* Empêcher le comportement de lien sur les boutons de pagination */
+.pagination-btn,
+.page-number {
+    cursor: pointer;
+    user-select: none;
+}
+
+.pagination-btn:focus,
+.page-number:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
