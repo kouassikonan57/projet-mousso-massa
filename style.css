@@ -161,8 +161,8 @@ button {
 }
 
 .logo-img {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 4.5rem;
+    height: 4.5rem;
     border-radius: var(--radius-full);
     object-fit: cover;
 }
