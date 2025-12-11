@@ -305,7 +305,7 @@ button {
             rgba(255, 255, 255, 0.06) 0%,
             rgba(255, 255, 255, 0.18) 40%,
             rgba(255, 255, 255, 0.6) 70%),
-        url('assets/images/marche-plein-air.png');
+        url('assets/images/marche-plein-air.jpeg');
     position: relative;
     display: flex;
     align-items: center;
@@ -636,10 +636,18 @@ button {
 
 .image-wrapper {
     width: 100%;
-    height: 16rem;
+    height: auto; /* Supprime la hauteur fixe */
+    min-height: 16rem; /* Hauteur minimale au lieu de fixe */
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 10px 30px var(--shadow-soft);
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* ou contain selon l'effet souhaité */
+    display: block;
 }
 
 @media (min-width: 768px) {
@@ -1408,7 +1416,7 @@ button {
 
 /* Événement Lakota */
 .lakota-event {
-    background: linear-gradient(135deg, var(--primary) 0%, #FF8C42 100%);
+    /* background: linear-gradient(135deg, var(--primary) 0%, #FF8C42 100%); */
     color: var(--white);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
@@ -1970,4 +1978,1180 @@ textarea.form-input {
 .page-number:focus {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
+}
+
+/* ===========================================
+   SECTION À PROPOS - COLONNES ÉGALES
+=========================================== */
+.apropos-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-2xl) 0;
+}
+
+.apropos-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(255, 102, 0, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+}
+
+/* Conteneur principal en 2 colonnes égales */
+.main-content.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+}
+
+/* COLONNE GAUCHE */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    height: 100%;
+}
+
+/* Introduction dans colonne gauche */
+.biography-header {
+    background: var(--white);
+    padding: var(--space-xl);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 0;
+}
+
+.biography-header .section-title {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+    text-align: left;
+}
+
+.biography-header .section-subtitle {
+    color: var(--accent);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: var(--space-lg);
+    text-align: left;
+}
+
+.biography-intro .lead {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    text-align: left;
+}
+
+/* Photo et citation dans colonne gauche */
+.president-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    flex: 1;
+}
+
+.president-portrait-wrapper {
+    width: 100%;
+}
+
+.president-portrait-frame {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    background: var(--white);
+    padding: 15px;
+}
+
+.president-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    transition: transform 0.5s ease;
+}
+
+.president-img:hover {
+    transform: scale(1.02);
+}
+
+/* Badge */
+.president-badge {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--primary);
+    margin-top: var(--space-md);
+}
+
+/* Citation */
+.president-quote {
+    background: linear-gradient(135deg, rgba(255, 102, 0, 0.1) 0%, transparent 100%);
+    border-left: 4px solid var(--primary);
+    padding: var(--space-xl);
+    margin: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* COLONNE DROITE */
+.right-column.biography-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    height: 100%;
+}
+
+.biography-section {
+    background: var(--white);
+    padding: var(--space-xl);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Décoration du cadre */
+.portrait-decoration {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.decoration-line {
+    width: 100px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.decoration-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+/* Badge icon */
+.badge-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.badge-text {
+    flex: 1;
+}
+
+.badge-text strong {
+    display: block;
+    color: var(--text-main);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.badge-text span {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Titres des sections */
+.section-subheading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: var(--space-lg);
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 102, 0, 0.2);
+}
+
+.section-subheading i {
+    font-size: 1.1rem;
+}
+
+/* Timeline académique */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.timeline-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+}
+
+.timeline-year {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
+}
+
+.timeline-content {
+    flex: 1;
+    background: var(--white);
+    padding: var(--space-md);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.timeline-content h4 {
+    color: var(--primary);
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.timeline-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+/* Grille carrière */
+.career-grid {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.career-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+    background: var(--white);
+    padding: var(--space-md);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.career-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.career-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: var(--white);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.career-item h4 {
+    color: var(--text-main);
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.career-item p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+/* Engagement */
+.engagement-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+    background: linear-gradient(135deg, rgba(255, 102, 0, 0.05) 0%, transparent 100%);
+    padding: var(--space-lg);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 102, 0, 0.1);
+}
+
+.engagement-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.engagement-content h4 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.engagement-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Grille média */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+}
+
+.media-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--white);
+    padding: var(--space-lg);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.media-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.media-badge {
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.media-item h4 {
+    color: var(--text-main);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.media-item p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Citation */
+.president-quote .quote-text {
+    font-size: 1.0rem;
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.president-quote .quote-author {
+    display: flex;
+    flex-direction: column;
+}
+
+.president-quote .quote-author strong {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.president-quote .quote-author span {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* HAUTEUR ÉGALE DES COLONNES */
+@media (min-width: 992px) {
+    .main-content.grid-container {
+        align-items: stretch;
+    }
+    
+    .left-column, 
+    .right-column {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .president-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .president-quote {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 991px) {
+    .main-content.grid-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+    
+    .left-column {
+        order: -1;
+    }
+}
+
+@media (max-width: 767px) {
+    .president-portrait-wrapper {
+        max-width: 100%;
+    }
+    
+    .president-badge {
+        flex-direction: row;
+        text-align: left;
+        max-width: 100%;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+    }
+    
+    .timeline-year {
+        width: 100%;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    
+    .career-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .media-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .media-item:last-child {
+        grid-column: span 2;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+    
+    .engagement-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .engagement-icon {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .media-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .media-item:last-child {
+        grid-column: span 1;
+        max-width: 100%;
+    }
+    
+    .president-portrait-frame {
+        padding: 10px;
+    }
+    
+    .president-badge {
+        padding: 15px;
+    }
+    
+    .biography-header,
+    .biography-section {
+        padding: var(--space-lg);
+    }
+    
+    .president-quote {
+        padding: var(--space-lg);
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.biography-header,
+.president-portrait-frame,
+.president-quote,
+.biography-section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.biography-header {
+    animation-delay: 0.2s;
+}
+
+.president-portrait-frame {
+    animation-delay: 0.4s;
+}
+
+.president-quote {
+    animation-delay: 0.5s;
+}
+
+.biography-section {
+    animation-delay: 0.6s;
+}
+
+/* ===========================================
+   SECTION CARAVANE ET COLLECTE
+=========================================== */
+.caravane-section {
+    background: linear-gradient(135deg, rgba(204, 0, 0, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.grid-container.reverse {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .grid-container.reverse {
+        grid-template-columns: 1fr 1fr;
+        direction: rtl;
+    }
+    
+    .grid-container.reverse > .text-content {
+        direction: ltr;
+    }
+    
+    .grid-container.reverse > .image-content {
+        direction: ltr;
+    }
+}
+
+.mission-grid {
+    display: grid;
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+}
+
+.mission-item {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+}
+
+.mission-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    color: var(--white);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.mission-content {
+    flex: 1;
+}
+
+.mission-content h3 {
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.mission-content p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.impact-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin: var(--space-xl) 0;
+    text-align: center;
+}
+
+.stat-item {
+    background: var(--white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 5px;
+    font-family: var(--font-headline);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.caravane-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.main-caravane-img {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.caravane-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+}
+
+.thumbnail {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail:hover {
+    transform: translateY(-5px);
+}
+
+.thumbnail-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.thumbnail-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--white);
+    padding: 8px;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.partnership-badge {
+    margin-top: var(--space-xl);
+    text-align: center;
+}
+
+.badge-content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: var(--white);
+    padding: 15px 25px;
+    border-radius: var(--radius-full);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.badge-content i {
+    color: var(--accent);
+    font-size: 1.3rem;
+}
+
+/* Animation pour les statistiques */
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-number {
+    animation: countUp 1s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid-container.reverse {
+        direction: ltr;
+    }
+    
+    .impact-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .president-caption {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin-top: 15px;
+    }
+    
+    .highlight-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .highlight-icon {
+        margin: 0 auto;
+    }
+}
+
+/* CORRECTION POUR LES IMAGES DU FORUM - REMPLISSAGE UNIFORME */
+#forumGallery .medias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+#forumGallery .media-item {
+    height: 320px !important; /* Hauteur fixe pour uniformité */
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 3px 10px var(--shadow);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    background: var(--white);
+    position: relative;
+}
+
+#forumGallery .media-img {
+    width: 100%;
+    height: 250px !important; /* Hauteur fixe pour l'image */
+    object-fit: cover !important; /* Remplit le conteneur sans déformation */
+    object-position: center center; /* Centre l'image, coupe les bords si nécessaire */
+    transition: transform 0.3s ease;
+}
+
+/* Pour les images très verticales, ajustez le positionnement */
+#forumGallery .media-img.portrait {
+    object-position: top center; /* Pour les portraits, alignez en haut */
+}
+
+/* Pour les images très horizontales (paysages) */
+#forumGallery .media-img.landscape {
+    object-position: center center;
+}
+
+#forumGallery .media-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: var(--white);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+/* Effet au survol - montre le caption */
+#forumGallery .media-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+#forumGallery .media-item:hover .media-img {
+    transform: scale(1.05);
+}
+
+#forumGallery .media-item:hover .media-caption {
+    opacity: 1;
+}
+
+/* Overlay pour améliorer la lisibilité */
+#forumGallery .media-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#forumGallery .media-item:hover::before {
+    opacity: 1;
+}
+
+/* Alternative: Si vous préférez toujours voir le caption */
+#forumGallery .media-caption.always-visible {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.7);
+    bottom: 0;
+    padding: 12px;
+}
+
+/* Modal pour images agrandies */
+.image-modal.active {
+    display: flex;
+    background: rgba(0, 0, 0, 0.95);
+}
+
+.image-modal .modal-image {
+    max-width: 90vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #000;
+}
+
+.image-modal .modal-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #forumGallery .medias-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 15px;
+    }
+    
+    #forumGallery .media-item {
+        height: 280px !important;
+    }
+    
+    #forumGallery .media-img {
+        height: 200px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #forumGallery .medias-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+    }
+    
+    #forumGallery .media-item {
+        height: 260px !important;
+    }
+    
+    #forumGallery .media-img {
+        height: 180px !important;
+    }
+}
+
+/* ===========================================
+   EFFETS DE SURVOL (HOVER) POUR TOUS LES BOUTONS
+=========================================== */
+
+/* Effet hover pour bouton principal (orange) */
+.btn-accent, .btn-primary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-accent:hover, .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+}
+
+/* Effet de vague au survol */
+.btn-accent::after, .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn-accent:hover::after, .btn-primary:hover::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+/* Effet hover pour bouton secondaire (contour) */
+.btn-outline, .btn-secondary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.btn-outline:hover, .btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Effet de remplissage au survol pour bouton contour */
+.btn-outline::before, .btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-outline:hover::before, .btn-secondary:hover::before {
+    left: 100%;
+}
+
+/* Effet spécifique pour les boutons small */
+.btn-accent.small:hover, .btn-primary.small:hover,
+.btn-outline.small:hover, .btn-secondary.small:hover {
+    transform: translateY(-2px);
+}
+
+/* Curseur pointer pour tous les boutons */
+button, .btn-accent, .btn-primary, .btn-outline, .btn-secondary,
+.pagination-btn, .page-number, .modal-close,
+.menu-toggle, .back-to-top {
+    cursor: pointer !important;
+}
+
+/* Animation pour le bouton "PARTICIPER À LA CARAVANE" spécifiquement */
+.button-group .btn-accent {
+    animation: pulse-accent 2s infinite;
+}
+
+@keyframes pulse-accent {
+    0%, 100% {
+        box-shadow: 0 5px 15px rgba(204, 0, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 25px rgba(204, 0, 0, 0.6);
+    }
+}
+
+/* Animation pour le bouton "VENIR AU PROCHAIN DON" spécifiquement */
+.button-group .btn-outline {
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.button-group .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: rgba(255, 102, 0, 0.05);
+}
+
+/* Effet au survol pour les icônes dans les boutons */
+.btn-accent:hover i, .btn-primary:hover i,
+.btn-outline:hover i, .btn-secondary:hover i {
+    transform: translateX(3px);
+    transition: transform 0.3s ease;
+}
+
+/* Responsive pour les petits écrans */
+@media (max-width: 768px) {
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .button-group button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ===========================================
+   STYLES POUR LES MODALS SCROLLABLES
+=========================================== */
+.modal-form-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--gray-100);
+}
+
+.modal-form-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-form-container::-webkit-scrollbar-track {
+    background: var(--gray-100);
+    border-radius: 4px;
+}
+
+.modal-form-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 4px;
+    border: 2px solid var(--gray-100);
+}
+
+.modal-form-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
+}
+
+/* Ajustement pour petits écrans */
+@media (max-height: 700px) {
+    .modal-content {
+        max-height: 90vh !important;
+        margin: 10px !important;
+    }
+    
+    .modal-form-container {
+        max-height: calc(90vh - 140px) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95% !important;
+        max-height: 90vh !important;
+        margin: 10px auto !important;
+    }
+}
+
+/* ===========================================
+   AMÉLIORATION DES CHECKBOXES
+=========================================== */
+.availability-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--gray-50);
+}
+
+.checkbox-label:hover {
+    background: var(--gray-100);
+    transform: translateY(-2px);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+/* Style pour les checkboxes dans les formulaires */
+.form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.form-check input[type="checkbox"] {
+    margin-top: 3px;
+    accent-color: var(--primary);
+}
+
+.form-check .checkbox-label {
+    background: none;
+    padding: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.form-check .checkbox-label:hover {
+    background: none;
+    color: var(--primary);
 }

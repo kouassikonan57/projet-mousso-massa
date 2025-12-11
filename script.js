@@ -24,6 +24,9 @@ function initializeSite() {
     // Initialiser la galerie d'images
     initializeGallery();
 
+    // Initialiser les nouvelles sections
+    initializeNewSections();
+
     // Initialiser la galerie du forum avec pagination
     initializeForumGallery();
 
@@ -675,14 +678,14 @@ function updateFormType(select) {
     }
 }
 
-// GALERIE AVEC PAGINATION POUR 43 IMAGES (SANS COMPTEUR)
+// GALERIE AVEC PAGINATION POUR 106 IMAGES (SANS COMPTEUR)
 function initializeForumGallery() {
     const galleryContainer = document.getElementById('forumGallery');
     if (!galleryContainer) return;
     
     // Configuration
     const IMAGES_PER_PAGE = 10;
-    const TOTAL_IMAGES = 43; // Total de 43 images
+    const TOTAL_IMAGES = 106; // Total de 106 images (43 + 63 nouvelles)
     const IMAGES_BASE_PATH = 'assets/images/forum-sanpedro/';
     
     let currentPage = 1;
@@ -695,8 +698,9 @@ function initializeForumGallery() {
     const totalPagesSpan = document.getElementById('totalPages');
     const pageNumbersContainer = document.getElementById('pageNumbers');
     
-    // Captions pour vos images
+    // Captions pour vos images (étendu pour 106 images)
     const imageCaptions = [
+        // Premières 43 images (existantes)
         "Soirée Gala", "Couronne d'honneur", "Session de travail", "Participants", 
         "Moments d'animation", "Discours d'ouverture", "Panel d'experts", 
         "Réseautage entre participantes", "Atelier pratique", "Présentations",
@@ -709,7 +713,31 @@ function initializeForumGallery() {
         "Planning stratégique", "Future collaborations", "Remerciements",
         "Clôture officielle", "Photo souvenir", "Ambiance festive", "Leadership féminin",
         "Émotion et partage", "Innovation", "Entrepreneuriat", "Empowerment",
-        "Solidarité féminine"
+        "Solidarité féminine",
+        
+        // Nouvelles 63 images (ajouts)
+        "Inauguration officielle", "Allocution principale", "Table ronde 1",
+        "Table ronde 2", "Questions du public", "Remise des prix",
+        "Trophées d'excellence", "Stand d'exposition", "Rencontres B2B",
+        "Signature de partenariats", "Médiation culturelle", "Performance artistique",
+        "Démonstration produits", "Témoignage entreprise", "Cas pratiques",
+        "Étude de cas", "Présentation résultats", "Analyse de marché",
+        "Tendances 2025", "Perspectives futures", "Atelier créativité",
+        "Exercice team-building", "Jeux de rôle", "Simulation d'entretien",
+        "Préparation pitch", "Feedback personnalisé", "Évaluation compétences",
+        "Certification participants", "Photo officielle", "Cocktail d'accueil",
+        "Buffet gourmand", "Dégustation produits locaux", "Animation musicale",
+        "Danse traditionnelle", "Spectacle vivant", "Remise des attestations",
+        "Mots de clôture", "Applaudissements finaux", "Selfies souvenirs",
+        "Échanges de contacts", "Promesses de suivi", "Planning futur",
+        "Évaluation satisfaction", "Questionnaire participants", "Collecte feedback",
+        "Derniers conseils", "Encouragements mutuels", "Souvenirs partagés",
+        "Ambiance conviviale", "Décorations festives", "Support technique",
+        "Équipe logistique", "Photographe officiel", "Service traiteur",
+        "Sécurité évènement", "Accueil participants", "Enregistrement arrivées",
+        "Kit participant", "Documentation remise", "Badges d'identification",
+        "Signalétique salle", "Écran géant", "Sonorisation professionnelle",
+        "Éclairage scénique", "Décoration scène", "Fleurissement salle"
     ];
     
     // Mettre à jour les indicateurs
@@ -724,7 +752,13 @@ function initializeForumGallery() {
             let filename;
             if (i === 1) filename = 'soiree-gala-1.jpg';
             else if (i === 2) filename = 'couronne.jpg';
-            else filename = `forum-${i - 2}.jpg`; // forum-1.jpg à forum-41.jpg
+            else if (i <= 43) {
+                // Images 3 à 43 : forum-1.jpg à forum-41.jpg
+                filename = `forum-${i - 2}.jpg`;
+            } else {
+                // Nouvelles images 44 à 106 : forum-42.jpg à forum-104.jpg
+                filename = `forum-${i - 2}.jpg`;
+            }
             
             images.push({
                 src: `${IMAGES_BASE_PATH}${filename}`,
@@ -987,4 +1021,505 @@ function initializeForumGallery() {
     
     // Initialiser
     initPagination();
+}
+
+// ===========================================
+// FONCTIONS POUR LA SECTION CARAVANE
+// ===========================================
+function openCaravaneRegistration() {
+    const modal = document.createElement('div');
+    modal.className = 'modal caravane-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-content" style="max-width: 500px; max-height: 85vh; display: flex; flex-direction: column;">
+            <div class="modal-header" style="flex-shrink: 0;">
+                <h3 class="modal-title">Participer à la Caravane</h3>
+                <button class="modal-close caravane-close" aria-label="Fermer">✕</button>
+            </div>
+            <div class="modal-form-container" style="flex: 1; overflow-y: auto; padding: 0 20px;">
+                <form action="submit.php" method="POST" class="modal-form" id="caravaneForm" style="padding: 10px 0;">
+                    <input type="hidden" name="type" value="caravane_participation">
+                    <input type="hidden" name="activity" value="caravane_collecte">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nom complet *</label>
+                        <input type="text" name="name" class="form-input" placeholder="Votre nom complet" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Téléphone *</label>
+                            <input type="tel" name="phone" class="form-input" placeholder="+225 ..." required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-input" placeholder="email@exemple.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Ville *</label>
+                        <input type="text" name="city" class="form-input" placeholder="Votre ville de résidence" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Je souhaite participer en tant que : *</label>
+                        <select name="role" class="form-select" required>
+                            <option value="">Sélectionner...</option>
+                            <option value="donneur">Donneur de sang</option>
+                            <option value="benevole">Bénévole</option>
+                            <option value="sensibilisateur">Sensibilisateur</option>
+                            <option value="organisateur">Organisateur local</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Disponibilités</label>
+                        <div class="availability-checkboxes">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="weekends" checked>
+                                Week-ends
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="weekdays">
+                                Semaine
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="evenings">
+                                Soirées
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input id="caravane-consent" name="consent" type="checkbox" class="checkbox" required>
+                        <label for="caravane-consent" class="checkbox-label">
+                            J'accepte de participer aux activités de la Caravane Moussos Massa et je m'engage à respecter les consignes de sécurité
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions" style="margin-top: 20px; padding: 15px 0; border-top: 1px solid #eee; flex-shrink: 0;">
+                        <button type="button" class="btn-outline caravane-cancel">Annuler</button>
+                        <button type="submit" class="btn-primary">M'inscrire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+    
+    // Gestion de la fermeture
+    const closeBtn = modal.querySelector('.caravane-close');
+    const cancelBtn = modal.querySelector('.caravane-cancel');
+    const overlay = modal.querySelector('.modal-overlay');
+    
+    const closeModal = function() {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            if (modal.parentNode) {
+                modal.remove();
+            }
+            document.body.style.overflow = '';
+        }, 300);
+    };
+    
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Soumission du formulaire
+    const form = document.getElementById('caravaneForm');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Animation du bouton
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Inscription en cours...';
+        submitBtn.disabled = true;
+        
+        // Envoyer les données
+        fetch('submit.php', {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else {
+                return response.text();
+            }
+        })
+        .then(data => {
+            if (data) {
+                try {
+                    const result = JSON.parse(data);
+                    if (result.success) {
+                        window.location.href = 'merci-caravane.html';
+                    } else {
+                        alert('Une erreur est survenue. Veuillez réessayer.');
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                } catch (e) {
+                    form.submit();
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            form.submit();
+        });
+    });
+}
+// ===========================================
+// ANIMATION DES STATISTIQUES
+// ===========================================
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const stat = entry.target;
+                const target = parseInt(stat.dataset.count);
+                animateCounter(stat, target);
+                observer.unobserve(stat);
+            }
+        });
+    }, observerOptions);
+    
+    stats.forEach(stat => {
+        observer.observe(stat);
+    });
+}
+
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50;
+    const duration = 1500;
+    const interval = duration / 50;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            clearInterval(timer);
+            element.textContent = target;
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, interval);
+}
+
+// ===========================================
+// INITIALISATION DES NOUVELLES SECTIONS
+// ===========================================
+function initializeNewSections() {
+    // Animer les statistiques
+    animateStats();
+    
+    // Initialiser la galerie de la caravane
+    initializeCaravaneGallery();
+    
+    // Gestion des thumbnails
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', function() {
+            const mainImg = document.querySelector('.main-caravane-img img');
+            const newSrc = this.querySelector('img').src;
+            const oldSrc = mainImg.src;
+            
+            // Animation de transition
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+                mainImg.src = newSrc;
+                mainImg.style.opacity = '1';
+            }, 300);
+            
+            // Mettre à jour la miniature active
+            thumbnails.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+}
+
+// Initialiser la galerie caravane
+function initializeCaravaneGallery() {
+    const gallery = document.querySelector('.caravane-gallery');
+    if (!gallery) return;
+    
+    // Créer le modal pour les images agrandies
+    const modal = document.createElement('div');
+    modal.className = 'image-modal caravane-image-modal';
+    modal.innerHTML = `
+        <span class="close-modal">&times;</span>
+        <img class="modal-image" src="" alt="">
+    `;
+    document.body.appendChild(modal);
+    
+    // Gestion des clics sur les images
+    gallery.querySelectorAll('img').forEach(img => {
+        img.addEventListener('click', function() {
+            const modalImg = modal.querySelector('.modal-image');
+            modalImg.src = this.src;
+            modalImg.alt = this.alt;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    // Fermer le modal
+    const closeBtn = modal.querySelector('.close-modal');
+    closeBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+    
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
+
+// Dans la fonction initializeForumGallery(), dans renderCurrentPage():
+// Ajoutez ce code après avoir créé imgElement :
+
+// Détecter si l'image est verticale ou horizontale
+imgElement.addEventListener('load', function() {
+    const naturalWidth = this.naturalWidth;
+    const naturalHeight = this.naturalHeight;
+    
+    // Calculer le ratio
+    const ratio = naturalHeight / naturalWidth;
+    
+    // Si l'image est très verticale (ratio > 1.5)
+    if (ratio > 1.5) {
+        this.classList.add('portrait');
+        this.style.objectPosition = 'top center';
+    }
+    // Si l'image est très horizontale (ratio < 0.7)
+    else if (ratio < 0.7) {
+        this.classList.add('landscape');
+        this.style.objectPosition = 'center 25%'; /* Déplace vers le haut pour les paysages */
+    }
+    
+    // Si l'image est carrée ou presque
+    else {
+        this.classList.add('square');
+        this.style.objectPosition = 'center center';
+    }
+});
+
+// Si l'image est déjà chargée
+if (imgElement.complete) {
+    imgElement.dispatchEvent(new Event('load'));
+}
+
+// ===========================================
+// FONCTION POUR "VENIR AU PROCHAIN DON"
+// ===========================================
+function openNextDonRegistration() {
+    const modal = document.createElement('div');
+    modal.className = 'modal nextdon-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-content" style="max-width: 500px; max-height: 85vh; display: flex; flex-direction: column;">
+            <div class="modal-header" style="flex-shrink: 0;">
+                <h3 class="modal-title">Venir au prochain don de sang</h3>
+                <button class="modal-close nextdon-close" aria-label="Fermer">✕</button>
+            </div>
+            <div class="modal-form-container" style="flex: 1; overflow-y: auto; padding: 0 20px;">
+                <form action="submit.php" method="POST" class="modal-form" id="nextDonForm" style="padding: 10px 0;">
+                    <input type="hidden" name="type" value="next_don_participation">
+                    <input type="hidden" name="activity" value="don_sang">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Nom complet *</label>
+                        <input type="text" name="name" class="form-input" placeholder="Votre nom complet" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Téléphone *</label>
+                            <input type="tel" name="phone" class="form-input" placeholder="+225 ..." required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-input" placeholder="email@exemple.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Ville *</label>
+                        <input type="text" name="city" class="form-input" placeholder="Votre ville de résidence" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Type de participation *</label>
+                        <select name="participation_type" class="form-select" required>
+                            <option value="">Sélectionner...</option>
+                            <option value="premier_don">Premier don</option>
+                            <option value="donneur_regulier">Donneur régulier</option>
+                            <option value="accompagnateur">Accompagner quelqu'un</option>
+                            <option value="curieux">Me renseigner d'abord</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Groupe sanguin (si connu)</label>
+                        <select name="blood_group" class="form-select">
+                            <option value="">Je ne connais pas</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Préférence de date</label>
+                        <div class="availability-checkboxes">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="weekend" checked>
+                                Week-end (Samedi)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="weekday">
+                                Semaine
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="morning">
+                                Matin
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="afternoon">
+                                Après-midi
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input id="nextdon-consent" name="consent" type="checkbox" class="checkbox" required>
+                        <label for="nextdon-consent" class="checkbox-label">
+                            Je souhaite être informé du prochain don de sang organisé par Moussos Massa
+                        </label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input id="newsletter" name="newsletter" type="checkbox" class="checkbox" checked>
+                        <label for="newsletter" class="checkbox-label">
+                            Je souhaite recevoir la newsletter sur les actions de don de sang
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions" style="margin-top: 20px; padding: 15px 0; border-top: 1px solid #eee; flex-shrink: 0;">
+                        <button type="button" class="btn-outline nextdon-cancel">Annuler</button>
+                        <button type="submit" class="btn-primary">M'inscrire pour le prochain don</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+    
+    // Gestion de la fermeture
+    const closeBtn = modal.querySelector('.nextdon-close');
+    const cancelBtn = modal.querySelector('.nextdon-cancel');
+    const overlay = modal.querySelector('.modal-overlay');
+    
+    const closeModal = function() {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            if (modal.parentNode) {
+                modal.remove();
+            }
+            document.body.style.overflow = '';
+        }, 300);
+    };
+    
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Soumission du formulaire
+    const form = document.getElementById('nextDonForm');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Animation du bouton
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Inscription en cours...';
+        submitBtn.disabled = true;
+        
+        // Envoyer les données
+        fetch('submit.php', {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else {
+                return response.text();
+            }
+        })
+        .then(data => {
+            if (data) {
+                try {
+                    const result = JSON.parse(data);
+                    if (result.success) {
+                        window.location.href = 'merci-don.html';
+                    } else {
+                        alert('Une erreur est survenue. Veuillez réessayer.');
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                } catch (e) {
+                    form.submit();
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            form.submit();
+        });
+    });
 }
