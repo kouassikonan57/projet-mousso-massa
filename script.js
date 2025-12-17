@@ -247,38 +247,109 @@ function initializeSite() {
   }
 }
 
-// FONCTION POUR LA GALERIE D'IMAGES
+// FONCTION POUR LA GALERIE D'IMAGES - VERSION CORRIGÉE POUR QUALITÉ
 function initializeGallery() {
   // Créer le modal pour images agrandies
   const modal = document.createElement("div");
   modal.className = "image-modal";
   modal.innerHTML = `
         <span class="close-modal">&times;</span>
-        <img class="modal-image" src="" alt="">
+        <img class="modal-image" src="" alt="" loading="lazy">
+        <div class="modal-caption"></div>
     `;
   document.body.appendChild(modal);
 
   const modalImg = modal.querySelector(".modal-image");
+  const modalCaption = modal.querySelector(".modal-caption");
   const closeModalBtn = modal.querySelector(".close-modal");
 
-  // Ouvrir l'image au clic
-  document.querySelectorAll(".media-img").forEach((img) => {
-    img.addEventListener("click", function () {
-      modalImg.src = this.src;
-      modalImg.alt = this.alt;
-      modal.classList.add("active");
-      document.body.style.overflow = "hidden";
+  // Fonction améliorée pour ouvrir l'image au clic
+  function openImageWithQuality(src, alt, caption) {
+    // Afficher un indicateur de chargement
+    modalImg.style.opacity = "0.5";
+
+    // Précharger l'image pour éviter le flou
+    const preloadImg = new Image();
+    preloadImg.onload = function () {
+      // Une fois chargée, afficher l'image avec transition
+      modalImg.src = src;
+      modalImg.alt = alt;
+      modalCaption.textContent = caption || alt;
+
+      // Animation d'apparition
+      setTimeout(() => {
+        modalImg.style.opacity = "1";
+      }, 50);
+    };
+
+    preloadImg.onerror = function () {
+      // Fallback si l'image ne se charge pas
+      modalImg.src = src;
+      modalImg.alt = alt;
+      modalCaption.textContent = caption || alt;
+      modalImg.style.opacity = "1";
+    };
+
+    preloadImg.src = src;
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  // Ouvrir l'image au clic - TOUTES les images
+  document
+    .querySelectorAll(
+      "img.media-img, img.portrait-img, img.feature-img, img.cnts-img, img.thumbnail-img"
+    )
+    .forEach((img) => {
+      img.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Empêcher le comportement par défaut si c'est un lien
+        if (this.parentElement.tagName === "A") {
+          e.preventDefault();
+        }
+
+        openImageWithQuality(this.src, this.alt, this.dataset.caption || "");
+      });
     });
+
+  // Également pour les images de la galerie forum
+  document.addEventListener("click", function (e) {
+    const img = e.target;
+    if (
+      img.classList &&
+      img.classList.contains("media-img") &&
+      !img.closest(".image-modal")
+    ) {
+      e.preventDefault();
+      e.stopPropagation();
+      openImageWithQuality(img.src, img.alt, img.dataset.caption || "");
+    }
   });
 
   // Fermer le modal
-  closeModalBtn.addEventListener("click", function () {
+  closeModalBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
     modal.classList.remove("active");
     document.body.style.overflow = "auto";
   });
 
   modal.addEventListener("click", function (e) {
     if (e.target === modal) {
+      e.preventDefault();
+      e.stopPropagation();
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  // Fermer avec la touche Échap
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && modal.classList.contains("active")) {
+      e.preventDefault();
       modal.classList.remove("active");
       document.body.style.overflow = "auto";
     }
@@ -694,7 +765,7 @@ function updateFormType(select) {
   }
 }
 
-// GALERIE AVEC PAGINATION POUR 106 IMAGES (SANS COMPTEUR)
+// GALERIE AVEC PAGINATION POUR 106 IMAGES (SANS COMPTEUR) - VERSION CORRIGÉE
 function initializeForumGallery() {
   const galleryContainer = document.getElementById("forumGallery");
   if (!galleryContainer) return;
@@ -864,6 +935,7 @@ function initializeForumGallery() {
         src: `${IMAGES_BASE_PATH}${filename}`,
         alt: `Forum San Pedro 2025 - Photo ${i}`,
         caption: imageCaptions[i - 1] || `Photo ${i}`,
+        index: i,
       });
     }
 
@@ -880,7 +952,7 @@ function initializeForumGallery() {
     setupEventListeners();
   }
 
-  // Afficher les images de la page courante (SANS COMPTEUR)
+  // Afficher les images de la page courante
   function renderCurrentPage() {
     // Afficher l'état de chargement
     galleryContainer.innerHTML = `
@@ -904,16 +976,38 @@ function initializeForumGallery() {
         mediaItem.innerHTML = `
                     <img src="${image.src}" alt="${image.alt}" class="media-img" 
                          loading="lazy"
+                         data-caption="${image.caption}"
+                         data-index="${image.index}"
                          onerror="this.onerror=null; this.src='assets/images/placeholder.jpg'; this.alt='Image non disponible'">
                     <div class="media-caption">${image.caption}</div>
                 `;
 
-        // Ajouter le clic pour agrandir
+        // Ajouter le clic pour agrandir - VERSION CORRIGÉE POUR QUALITÉ
         const imgElement = mediaItem.querySelector(".media-img");
+
+        // Détecter si l'image est verticale ou horizontale
+        const preloadImg = new Image();
+        preloadImg.onload = function () {
+          const naturalWidth = this.width;
+          const naturalHeight = this.height;
+          const ratio = naturalHeight / naturalWidth;
+
+          if (ratio > 1.5) {
+            imgElement.classList.add("portrait");
+          } else if (ratio < 0.7) {
+            imgElement.classList.add("landscape");
+          } else {
+            imgElement.classList.add("square");
+          }
+        };
+        preloadImg.src = image.src;
+
         imgElement.addEventListener("click", function (e) {
           e.preventDefault();
           e.stopPropagation();
-          openImageModal(this.src, this.alt, image.caption);
+
+          // Fonction pour ouvrir l'image en grand avec haute qualité
+          openImageModal(this.src, this.alt, this.dataset.caption);
         });
 
         galleryContainer.appendChild(mediaItem);
@@ -921,7 +1015,7 @@ function initializeForumGallery() {
     }, 300);
   }
 
-  // Fonction pour ouvrir l'image en grand
+  // Fonction pour ouvrir l'image en grand avec haute qualité
   function openImageModal(src, alt, caption) {
     // Créer ou réutiliser le modal d'image
     let modal = document.querySelector(".image-modal");
@@ -930,7 +1024,7 @@ function initializeForumGallery() {
       modal.className = "image-modal";
       modal.innerHTML = `
                 <span class="close-modal">&times;</span>
-                <img class="modal-image" src="" alt="">
+                <img class="modal-image" src="" alt="" loading="eager">
                 <div class="modal-caption"></div>
             `;
       document.body.appendChild(modal);
@@ -963,13 +1057,38 @@ function initializeForumGallery() {
       });
     }
 
-    // Afficher l'image
+    // Afficher l'image avec préchargement pour éviter le flou
     const modalImg = modal.querySelector(".modal-image");
     const modalCaption = modal.querySelector(".modal-caption");
 
-    modalImg.src = src;
-    modalImg.alt = alt;
-    modalCaption.textContent = caption || alt;
+    // Afficher d'abord une version floue puis la charger en haute qualité
+    modalImg.style.opacity = "0.3";
+    modalImg.style.filter = "blur(5px)";
+
+    // Précharger l'image
+    const preloadImg = new Image();
+    preloadImg.onload = function () {
+      modalImg.src = src;
+      modalImg.alt = alt;
+      modalCaption.textContent = caption || alt;
+
+      // Animation pour une transition fluide
+      setTimeout(() => {
+        modalImg.style.opacity = "1";
+        modalImg.style.filter = "blur(0)";
+        modalImg.style.transition = "opacity 0.5s ease, filter 0.5s ease";
+      }, 50);
+    };
+
+    preloadImg.onerror = function () {
+      modalImg.src = src;
+      modalImg.alt = alt;
+      modalCaption.textContent = caption || alt;
+      modalImg.style.opacity = "1";
+      modalImg.style.filter = "blur(0)";
+    };
+
+    preloadImg.src = src;
 
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
@@ -1288,6 +1407,7 @@ function openCaravaneRegistration() {
       });
   });
 }
+
 // ===========================================
 // ANIMATION DES STATISTIQUES
 // ===========================================
@@ -1374,7 +1494,7 @@ function initializeCaravaneGallery() {
   modal.className = "image-modal caravane-image-modal";
   modal.innerHTML = `
         <span class="close-modal">&times;</span>
-        <img class="modal-image" src="" alt="">
+        <img class="modal-image" src="" alt="" loading="eager">
     `;
   document.body.appendChild(modal);
 
@@ -1382,10 +1502,16 @@ function initializeCaravaneGallery() {
   gallery.querySelectorAll("img").forEach((img) => {
     img.addEventListener("click", function () {
       const modalImg = modal.querySelector(".modal-image");
-      modalImg.src = this.src;
-      modalImg.alt = this.alt;
-      modal.classList.add("active");
-      document.body.style.overflow = "hidden";
+
+      // Précharger pour éviter le flou
+      const preloadImg = new Image();
+      preloadImg.onload = function () {
+        modalImg.src = this.src;
+        modalImg.alt = this.alt;
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      };
+      preloadImg.src = this.src;
     });
   });
 
@@ -1402,41 +1528,6 @@ function initializeCaravaneGallery() {
       document.body.style.overflow = "auto";
     }
   });
-}
-
-// Dans la fonction initializeForumGallery(), dans renderCurrentPage():
-// Ajoutez ce code après avoir créé imgElement :
-
-// Détecter si l'image est verticale ou horizontale
-imgElement.addEventListener("load", function () {
-  const naturalWidth = this.naturalWidth;
-  const naturalHeight = this.naturalHeight;
-
-  // Calculer le ratio
-  const ratio = naturalHeight / naturalWidth;
-
-  // Si l'image est très verticale (ratio > 1.5)
-  if (ratio > 1.5) {
-    this.classList.add("portrait");
-    this.style.objectPosition = "top center";
-  }
-  // Si l'image est très horizontale (ratio < 0.7)
-  else if (ratio < 0.7) {
-    this.classList.add("landscape");
-    this.style.objectPosition =
-      "center 25%"; /* Déplace vers le haut pour les paysages */
-  }
-
-  // Si l'image est carrée ou presque
-  else {
-    this.classList.add("square");
-    this.style.objectPosition = "center center";
-  }
-});
-
-// Si l'image est déjà chargée
-if (imgElement.complete) {
-  imgElement.dispatchEvent(new Event("load"));
 }
 
 // ===========================================
@@ -1629,108 +1720,108 @@ function openNextDonRegistration() {
 }
 
 // ===========================================
-// HERO SLIDER AUTOMATIQUE
+// HERO SLIDER AUTOMATIQUE - VERSION CORRIGÉE
 // ===========================================
 function initializeHeroSlider() {
-    const heroSlider = document.querySelector('.hero-slider');
-    if (!heroSlider) return;
-    
-    const slides = heroSlider.querySelectorAll('.hero-slide');
-    const dots = heroSlider.querySelectorAll('.dot');
-    const prevArrow = heroSlider.querySelector('.prev-arrow');
-    const nextArrow = heroSlider.querySelector('.next-arrow');
-    
-    let currentSlide = 0;
-    const totalSlides = slides.length;
-    let slideInterval;
-    const slideDuration = 5000; // 5 secondes par image
-    
-    // Initialiser le slider
-    function initSlider() {
-        if (totalSlides > 0) {
-            showSlide(0);
-            startAutoSlide();
-            
-            // Ajouter les événements
-            if (prevArrow) prevArrow.addEventListener('click', prevSlide);
-            if (nextArrow) nextArrow.addEventListener('click', nextSlide);
-            
-            // Gestion des points
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => goToSlide(index));
-            });
-            
-            // Pause au survol
-            heroSlider.addEventListener('mouseenter', pauseSlider);
-            heroSlider.addEventListener('mouseleave', startAutoSlide);
-            
-            // Animation des éléments avec délai
-            animateHeroElements();
-        }
+  const heroSlider = document.querySelector(".hero-slider");
+  if (!heroSlider) return;
+
+  const slides = heroSlider.querySelectorAll(".hero-slide");
+  const dots = heroSlider.querySelectorAll(".dot");
+  const prevArrow = heroSlider.querySelector(".prev-arrow");
+  const nextArrow = heroSlider.querySelector(".next-arrow");
+
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+  let slideInterval;
+  const slideDuration = 5000; // 5 secondes par image
+
+  // Initialiser le slider
+  function initSlider() {
+    if (totalSlides > 0) {
+      showSlide(0);
+      startAutoSlide();
+
+      // Ajouter les événements
+      if (prevArrow) prevArrow.addEventListener("click", prevSlide);
+      if (nextArrow) nextArrow.addEventListener("click", nextSlide);
+
+      // Gestion des points
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => goToSlide(index));
+      });
+
+      // Pause au survol
+      heroSlider.addEventListener("mouseenter", pauseSlider);
+      heroSlider.addEventListener("mouseleave", startAutoSlide);
+
+      // Animation des éléments avec délai
+      animateHeroElements();
     }
-    
-    // Afficher une slide spécifique
-    function showSlide(index) {
-        // Retirer la classe active de toutes les slides et dots
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        // Ajouter la classe active à la slide et dot courante
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        
-        currentSlide = index;
-    }
-    
-    // Slide suivante
-    function nextSlide() {
-        let next = currentSlide + 1;
-        if (next >= totalSlides) next = 0;
-        showSlide(next);
-        resetAutoSlide();
-    }
-    
-    // Slide précédente
-    function prevSlide() {
-        let prev = currentSlide - 1;
-        if (prev < 0) prev = totalSlides - 1;
-        showSlide(prev);
-        resetAutoSlide();
-    }
-    
-    // Aller à une slide spécifique
-    function goToSlide(index) {
-        showSlide(index);
-        resetAutoSlide();
-    }
-    
-    // Démarrer le défilement automatique
-    function startAutoSlide() {
-        if (slideInterval) clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, slideDuration);
-    }
-    
-    // Pause le défilement
-    function pauseSlider() {
-        if (slideInterval) clearInterval(slideInterval);
-    }
-    
-    // Réinitialiser le timer
-    function resetAutoSlide() {
-        pauseSlider();
-        startAutoSlide();
-    }
-    
-    // Animation des éléments du hero
-    function animateHeroElements() {
-        const animatedElements = heroSlider.querySelectorAll('.animate-fade-in-up');
-        
-        animatedElements.forEach((element, index) => {
-            const delay = element.dataset.delay || '0s';
-            element.style.animationDelay = delay;
-        });
-    }
-    
-    // Initialiser
-    initSlider();
+  }
+
+  // Afficher une slide spécifique
+  function showSlide(index) {
+    // Retirer la classe active de toutes les slides et dots
+    slides.forEach((slide) => slide.classList.remove("active"));
+    dots.forEach((dot) => dot.classList.remove("active"));
+
+    // Ajouter la classe active à la slide et dot courante
+    slides[index].classList.add("active");
+    dots[index].classList.add("active");
+
+    currentSlide = index;
+  }
+
+  // Slide suivante
+  function nextSlide() {
+    let next = currentSlide + 1;
+    if (next >= totalSlides) next = 0;
+    showSlide(next);
+    resetAutoSlide();
+  }
+
+  // Slide précédente
+  function prevSlide() {
+    let prev = currentSlide - 1;
+    if (prev < 0) prev = totalSlides - 1;
+    showSlide(prev);
+    resetAutoSlide();
+  }
+
+  // Aller à une slide spécifique
+  function goToSlide(index) {
+    showSlide(index);
+    resetAutoSlide();
+  }
+
+  // Démarrer le défilement automatique
+  function startAutoSlide() {
+    if (slideInterval) clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, slideDuration);
+  }
+
+  // Pause le défilement
+  function pauseSlider() {
+    if (slideInterval) clearInterval(slideInterval);
+  }
+
+  // Réinitialiser le timer
+  function resetAutoSlide() {
+    pauseSlider();
+    startAutoSlide();
+  }
+
+  // Animation des éléments du hero
+  function animateHeroElements() {
+    const animatedElements = heroSlider.querySelectorAll(".animate-fade-in-up");
+
+    animatedElements.forEach((element, index) => {
+      const delay = element.dataset.delay || "0s";
+      element.style.animationDelay = delay;
+    });
+  }
+
+  // Initialiser
+  initSlider();
 }

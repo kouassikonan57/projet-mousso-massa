@@ -60,6 +60,7 @@
             src="assets/images/logo-origin.jpg"
             alt="Logo Mousso Massa"
             class="preloader-img"
+            loading="eager"
           />
         </div>
 
@@ -108,6 +109,7 @@
                   src="assets/images/logo-origin.jpg"
                   alt="Logo ONG Moussos Massa"
                   class="logo-img"
+                  loading="eager"
                 />
               </div>
               <div class="logo-text">
@@ -185,83 +187,104 @@
 
     <main class="main-content">
       <!-- HERO -->
-<section id="home" class="hero-section">
-    <div class="hero-slider">
-        <!-- Première image de fond -->
-        <div class="hero-slide active" style="background-image: linear-gradient(180deg,
-                rgba(255, 255, 255, 0.06) 0%,
-                rgba(255, 255, 255, 0.18) 40%,
-                rgba(255, 255, 255, 0.6) 70%),
-            url('assets/images/marche-plein-air.jpeg');">
-        </div>
-        
-        <!-- Deuxième image de fond -->
-        <div class="hero-slide" style="background-image: linear-gradient(180deg,
-                rgba(255, 255, 255, 0.06) 0%,
-                rgba(255, 255, 255, 0.18) 40%,
-                rgba(255, 255, 255, 0.6) 70%),
-            url('assets/images/hero-bg-2.jpg');">
-        </div>
-        
-        <!-- Overlay fixe -->
-        <div class="hero-overlay"></div>
-        
-        <!-- Points de navigation -->
-        <div class="slider-dots">
+      <section id="home" class="hero-section">
+        <div class="hero-slider">
+          <!-- Première image de fond -->
+          <div class="hero-slide active">
+            <img
+              src="assets/images/marche-plein-air.jpeg"
+              alt="Marche plein air Moussos Massa"
+              class="hero-background-img"
+              loading="eager"
+            />
+          </div>
+
+          <!-- Deuxième image de fond -->
+          <div class="hero-slide">
+            <img
+              src="assets/images/hero-bg-2.jpg"
+              alt="Femmes fortes Moussos Massa"
+              class="hero-background-img"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Overlay fixe -->
+          <div class="hero-overlay"></div>
+
+          <!-- Points de navigation -->
+          <div class="slider-dots">
             <span class="dot active" data-slide="0"></span>
             <span class="dot" data-slide="1"></span>
-        </div>
-        
-        <!-- Contenu Hero -->
-        <div class="container hero-container">
+          </div>
+
+          <!-- Contenu Hero -->
+          <div class="container hero-container">
             <div class="hero-content">
-                <p class="hero-tag animate-fade-in-up" data-delay="0.2s">#MoussoMassaONG</p>
+              <p class="hero-tag animate-fade-in-up" data-delay="0.2s">
+                #MoussoMassaONG
+              </p>
 
-                <h1 class="hero-title animate-fade-in-up" data-delay="0.4s">
-                    Moussos Massa,
-                    <span class="hero-highlight typing-text">la femme forte et valeureuse</span>
-                </h1>
+              <h1 class="hero-title animate-fade-in-up" data-delay="0.4s">
+                Moussos Massa,
+                <span class="hero-highlight typing-text"
+                  >la femme forte et valeureuse</span
+                >
+              </h1>
 
-                <p class="hero-description animate-fade-in-up" data-delay="0.6s">
-                    Moussos Massa, un état d'esprit qui valorise la femme. Loin de
-                    distraire l'opinion publique, vise à l'épanouissement et à la
-                    réalisation des Femmes.
-                </p>
+              <p class="hero-description animate-fade-in-up" data-delay="0.6s">
+                Moussos Massa, un état d'esprit qui valorise la femme. Loin de
+                distraire l'opinion publique, vise à l'épanouissement et à la
+                réalisation des Femmes.
+              </p>
 
-                <div class="hero-buttons animate-fade-in-up" data-delay="0.8s">
-                    <a href="#forum" class="btn-accent" title="Participer au forum">
-                        <i class="fas fa-calendar-alt btn-icon"></i>
-                        FORUM 2025
-                    </a>
+              <div class="hero-buttons animate-fade-in-up" data-delay="0.8s">
+                <a href="#forum" class="btn-accent" title="Participer au forum">
+                  <i class="fas fa-calendar-alt btn-icon"></i>
+                  FORUM 2025
+                </a>
 
-                    <button id="ctaRegister" class="btn-secondary">
-                        <i class="fas fa-users btn-icon"></i>
-                        J'ADHÈRE À L'ONG
-                    </button>
-                </div>
+                <button id="ctaRegister" class="btn-secondary">
+                  <i class="fas fa-users btn-icon"></i>
+                  J'ADHÈRE À L'ONG
+                </button>
+              </div>
 
-                <p class="hero-motto animate-fade-in-up" data-delay="1s">Quand La Femme veut, elle peut</p>
+              <p class="hero-motto animate-fade-in-up" data-delay="1s">
+                Quand La Femme veut, elle peut
+              </p>
             </div>
-        </div>
-        
-        <!-- Flèches de navigation (optionnel) -->
-        <button class="slider-arrow prev-arrow">
+          </div>
+
+          <!-- Flèches de navigation (optionnel) -->
+          <button class="slider-arrow prev-arrow">
             <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="slider-arrow next-arrow">
+          </button>
+          <button class="slider-arrow next-arrow">
             <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-    
-    <!-- Wave separator -->
-    <div class="hero-wave">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor"></path>
-            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35,6.36,119.13-6.29,26.66-8.93,53.41-21.08,80.8-34.03,38.38-18.42,76.88-37.85,115.5-55.24,27.11-12.36,55.22-22.65,83.39-33.11C1029.85,7.14,1110.54,7.5,1200,27.34V0Z" opacity=".5" fill="currentColor"></path>
-            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor"></path>
-        </svg>
-    </div>
-</section>
+          </button>
+        </div>
+
+        <!-- Wave separator -->
+        <div class="hero-wave">
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+              d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+              opacity=".25"
+              fill="currentColor"
+            ></path>
+            <path
+              d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35,6.36,119.13-6.29,26.66-8.93,53.41-21.08,80.8-34.03,38.38-18.42,76.88-37.85,115.5-55.24,27.11-12.36,55.22-22.65,83.39-33.11C1029.85,7.14,1110.54,7.5,1200,27.34V0Z"
+              opacity=".5"
+              fill="currentColor"
+            ></path>
+            <path
+              d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </div>
+      </section>
 
       <!-- SECTION À PROPOS -->
       <section id="apropos" class="section apropos-section">
@@ -297,6 +320,7 @@
                       class="president-img"
                       width="500"
                       height="700"
+                      loading="lazy"
                     />
                     <div class="portrait-decoration">
                       <div class="decoration-line"></div>
@@ -492,22 +516,25 @@
                   src="assets/images/img-1.png"
                   alt="Émission TV Mousso Massa"
                   class="portrait-img"
+                  loading="lazy"
                 />
                 <p class="activity-title">Émission TV</p>
               </div>
               <div class="activity-card">
                 <img
-                  src="assets/images/img-2.png"
+                  src="assets/images/img-3.png"
                   alt="Caravane Mousso Massa"
                   class="portrait-img"
+                  loading="lazy"
                 />
                 <p class="activity-title">Caravane et Collecte de sang</p>
               </div>
               <div class="activity-card">
                 <img
-                  src="assets/images/img-3.png"
+                  src="assets/images/img-2.png"
                   alt="Forum Mousso Massa"
                   class="portrait-img"
+                  loading="lazy"
                 />
                 <p class="activity-title">Forum</p>
               </div>
@@ -565,9 +592,10 @@
             <div class="image-half">
               <div class="image-wrapper">
                 <img
-                  src="assets/images/emission.jpeg"
+                  src="assets/images/emission.jpg"
                   alt="Émission TV Mousso Massa"
                   class="feature-img"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -637,14 +665,17 @@
 
               <div class="impact-stats">
                 <div class="stat-item">
+                  <div class="estimation-label">Estimation 2025</div>
                   <div class="stat-number" data-count="1500">0</div>
                   <div class="stat-label">Poches de sang collectées</div>
                 </div>
                 <div class="stat-item">
+                  <div class="estimation-label">Estimation 2025</div>
                   <div class="stat-number" data-count="25">0</div>
                   <div class="stat-label">Communautés visitées</div>
                 </div>
                 <div class="stat-item">
+                  <div class="estimation-label">Estimation 2025</div>
                   <div class="stat-number" data-count="3000">0</div>
                   <div class="stat-label">Personnes sensibilisées</div>
                 </div>
@@ -676,6 +707,7 @@
                     src="assets/images/caravane-main.jpg"
                     alt="Caravane Moussos Massa - Action solidaire"
                     class="feature-img"
+                    loading="lazy"
                   />
                 </div>
                 <div class="caravane-thumbnails">
@@ -684,24 +716,27 @@
                       src="assets/images/caravane-1.jpg"
                       alt="Collecte de sang"
                       class="thumbnail-img"
+                      loading="lazy"
                     />
-                    <div class="thumbnail-caption">Collecte de sang</div>
+                    <div class="thumbnail-caption"></div>
                   </div>
                   <div class="thumbnail">
                     <img
                       src="assets/images/caravane-2.jpg"
                       alt="Sensibilisation"
                       class="thumbnail-img"
+                      loading="lazy"
                     />
-                    <div class="thumbnail-caption">Trophée de recompense</div>
+                    <div class="thumbnail-caption"></div>
                   </div>
                   <div class="thumbnail">
                     <img
                       src="assets/images/caravane-3.jpg"
                       alt="Équipe médicale"
                       class="thumbnail-img"
+                      loading="lazy"
                     />
-                    <div class="thumbnail-caption">Invité(e)s</div>
+                    <div class="thumbnail-caption"></div>
                   </div>
                 </div>
               </div>
@@ -724,6 +759,8 @@
                         src="assets/images/cnts-convention-1.jpg"
                         alt="Signature de convention CNTS 1"
                         class="cnts-img"
+                        loading="lazy"
+                        onload="applyImageStyles(this)"
                       />
                       <div class="cnts-caption">Signature officielle</div>
                     </div>
@@ -732,6 +769,8 @@
                         src="assets/images/cnts-convention-2.jpg"
                         alt="Signature de convention CNTS 2"
                         class="cnts-img"
+                        loading="lazy"
+                        onload="applyImageStyles(this)"
                       />
                       <div class="cnts-caption">Échange de documents</div>
                     </div>
@@ -740,6 +779,8 @@
                         src="assets/images/cnts-convention-3.jpg"
                         alt="Signature de convention CNTS 3"
                         class="cnts-img"
+                        loading="lazy"
+                        onload="applyImageStyles(this)"
                       />
                       <div class="cnts-caption">Photo de groupe</div>
                     </div>
@@ -787,6 +828,7 @@
                 src="assets/images/lakota-event.png"
                 alt="Événement Mousso Massa à Sirasso - À venir"
                 class="media-img"
+                loading="lazy"
               />
               <div class="media-caption">Événement à Sirasso</div>
             </div>
@@ -841,9 +883,9 @@
               </ul>
 
               <div class="button-group">
-                <button id="openRegister-1" class="btn-accent small">
+                <!-- <button id="openRegister-1" class="btn-accent small">
                   S'INSCRIRE AU FORUM
-                </button>
+                </button> -->
                 <a href="#programme" class="btn-outline small"
                   >Programme détaillé</a
                 >
@@ -853,9 +895,10 @@
             <div class="image-content">
               <div class="image-wrapper">
                 <img
-                  src="assets/images/img-forum.jpeg"
+                  src="assets/images/img-forum.jpg"
                   alt="Forum Mousso Massa"
                   class="feature-img"
+                  loading="lazy"
                 />
               </div>
               <p class="image-caption">
@@ -905,6 +948,7 @@
                     src="https://img.youtube.com/vi/Rljg7N8UQ68/hqdefault.jpg"
                     alt="Vidéo YouTube Émission"
                     class="media-img"
+                    loading="lazy"
                   />
 
                   <div class="video-icon">
@@ -913,6 +957,17 @@
 
                   <div class="media-caption">Voir sur YouTube</div>
                 </div>
+              </div>
+              <!-- Après le contenu de chaque section medias-grid -->
+              <div class="see-more-container">
+                <a
+                  href="https://www.facebook.com/MoussoMassa"
+                  target="_blank"
+                  class="see-more-btn"
+                >
+                  Voir plus
+                  <i class="fas fa-arrow-right"></i>
+                </a>
               </div>
             </div>
 
@@ -989,23 +1044,6 @@
                   </div>
                   <div class="media-caption">Interview #1</div>
                 </div>
-                
-                <!-- Vidéo 8 -->
-                <div class="media-item">
-                  <video
-                    class="media-video"
-                    poster="assets/videos/emission/poster-8.jpg"
-                  >
-                    <source
-                      src="assets/videos/emission/video-8.mp4"
-                      type="video/mp4"
-                    />
-                  </video>
-                  <div class="video-icon">
-                    <i class="fas fa-play"></i>
-                  </div>
-                  <div class="media-caption">Ambiance #1</div>
-                </div>
 
                 <!-- Vidéo 3 -->
                 <div class="media-item">
@@ -1075,6 +1113,18 @@
                   <div class="media-caption">Sport #4</div>
                 </div>
               </div>
+
+              <!-- Après le contenu de chaque section medias-grid -->
+              <div class="see-more-container">
+                <a
+                  href="https://www.tiktok.com/@gbatiguimousso?is_from_webapp=1&sender_device=pc/"
+                  target="_blank"
+                  class="see-more-btn"
+                >
+                  Voir plus
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
             </div>
 
             <!-- Forum San Pedro 2025 -->
@@ -1082,7 +1132,9 @@
               class="medias-section forum-gallery-section"
               id="forum-gallery"
             >
-              <h3 class="medias-title">Forum San Pedro 2025 - Moments forts</h3>
+              <h3 class="medias-title">
+                Caravane & Forum San Pedro 2025 - Moments forts
+              </h3>
 
               <!-- Contrôles de pagination -->
               <div class="pagination-controls">
@@ -1108,6 +1160,18 @@
               <!-- Numéros de page -->
               <div class="page-numbers" id="pageNumbers">
                 <!-- Les numéros de page seront générés par JavaScript -->
+              </div>
+
+              <!-- Après le contenu de chaque section medias-grid -->
+              <div class="see-more-container">
+                <a
+                  href="https://www.facebook.com/MoussoMassa"
+                  target="_blank"
+                  class="see-more-btn"
+                >
+                  Voir plus
+                  <i class="fas fa-arrow-right"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -1201,6 +1265,7 @@
                 src="assets/images/partenaire-1.jpg"
                 alt="Forum Mousso Massa 2"
                 class="logo-img"
+                loading="lazy"
               />
             </div>
 
@@ -1209,6 +1274,7 @@
                 src="assets/images/partenaire-2.jpg"
                 alt="CNTS"
                 class="logo-img"
+                loading="lazy"
               />
             </div>
 
@@ -1217,6 +1283,7 @@
                 src="assets/images/partenaire-3.jpg"
                 alt="MAIRIE SAN PEDRO"
                 class="logo-img"
+                loading="lazy"
               />
             </div>
 
@@ -1225,6 +1292,7 @@
                 src="assets/images/partenaire-4.jpg"
                 alt="CNTSCI"
                 class="logo-img"
+                loading="lazy"
               />
             </div>
           </div>
@@ -1271,7 +1339,7 @@
 
               <div class="social-icons">
                 <a
-                  href="https://facebook.com/MoussoMassa"
+                  href="https://www.facebook.com/share/1G3KbbaSMe/"
                   target="_blank"
                   class="social-icon"
                   aria-label="Facebook"
@@ -1279,7 +1347,7 @@
                   <i class="fab fa-facebook-f"></i>
                 </a>
                 <a
-                  href="https://tiktok.com/@MoussoMassa"
+                  href="https://www.tiktok.com/@gbatiguimousso?is_from_webapp=1&sender_device=pc/"
                   target="_blank"
                   class="social-icon"
                   aria-label="TikTok"

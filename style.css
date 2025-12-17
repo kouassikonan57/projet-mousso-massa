@@ -61,10 +61,82 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
 }
 
+/* CORRECTION CRITIQUE POUR LA QUALITÉ DES IMAGES */
 img {
     max-width: 100%;
     height: auto;
     display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: bicubic;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Qualité optimisée pour toutes les images */
+.president-img,
+.feature-img,
+.media-img,
+.portrait-img,
+.cnts-img,
+.thumbnail-img,
+.logo-img,
+.hero-background-img {
+    image-rendering: auto;
+    object-fit: cover;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Images en plein écran (hero) */
+.hero-background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: brightness(0.9);
+    -webkit-filter: brightness(0.9);
+}
+
+/* Images dans la galerie */
+#forumGallery .media-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    image-rendering: optimizeQuality;
+}
+
+#forumGallery .media-item:hover .media-img {
+    transform: scale(1.05);
+}
+
+/* Images dans le modal d'agrandissement */
+.modal-image {
+    image-rendering: optimizeQuality;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    background: #000;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+/* Pour prévenir le flou sur les transformations */
+.media-item, .thumbnail, .activity-card {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 a {
@@ -165,6 +237,7 @@ button {
     height: 2.5rem;
     border-radius: var(--radius-full);
     object-fit: cover;
+    image-rendering: optimizeQuality;
 }
 
 .forum-text {
@@ -320,11 +393,10 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
     opacity: 0;
     transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
+    overflow: hidden;
 }
 
 .hero-slide.active {
@@ -866,6 +938,7 @@ button {
     object-fit: cover;
     border-radius: var(--radius-md);
     box-shadow: 0 1px 2px var(--shadow);
+    image-rendering: optimizeQuality;
 }
 
 /* Marche section */
@@ -921,8 +994,8 @@ button {
 
 .image-wrapper {
     width: 100%;
-    height: auto; /* Supprime la hauteur fixe */
-    min-height: 16rem; /* Hauteur minimale au lieu de fixe */
+    height: auto;
+    min-height: 16rem;
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 10px 30px var(--shadow-soft);
@@ -930,8 +1003,8 @@ button {
 
 .image-wrapper img {
     width: 100%;
-    height: auto;
-    object-fit: cover; /* ou contain selon l'effet souhaité */
+    height: 100%;
+    object-fit: cover;
     display: block;
 }
 
@@ -945,6 +1018,7 @@ button {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    image-rendering: optimizeQuality;
 }
 
 .image-caption {
@@ -1391,11 +1465,10 @@ button {
 }
 
 .back-to-top .arrow-up {
-    font-size: 13px !important; /* TAILLE DE LA FLÈCHE */
+    font-size: 13px !important;
     color: #ffffff !important;
     font-weight: bold;
 }
-
 
 /* Focus styles */
 :focus {
@@ -1461,6 +1534,7 @@ button {
     object-fit: cover;
     border: 5px solid white;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    image-rendering: optimizeQuality;
 }
 
 .preloader-text {
@@ -1613,6 +1687,8 @@ button {
     transition: transform 0.3s ease;
     cursor: pointer;
     height: 150px;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .media-item:hover {
@@ -1623,6 +1699,9 @@ button {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    image-rendering: optimizeQuality;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .media-video {
@@ -1665,7 +1744,7 @@ button {
     opacity: 1;
 }
 
-/* Modal pour médias (identique à précédent mais ajouté ici pour être sûr) */
+/* Modal pour images agrandies */
 .image-modal {
     position: fixed;
     top: 0;
@@ -1683,10 +1762,12 @@ button {
     display: flex;
 }
 
-.modal-image {
-    max-width: 90%;
-    max-height: 80%;
+.image-modal .modal-image {
+    max-width: 90vw;
+    max-height: 80vh;
     border-radius: var(--radius-md);
+    background: #000;
+    image-rendering: optimizeQuality;
 }
 
 .close-modal {
@@ -1701,12 +1782,12 @@ button {
 
 /* Événement Lakota */
 .lakota-event {
-    /* background: linear-gradient(135deg, var(--primary) 0%, #FF8C42 100%); */
     color: var(--white);
     padding: var(--space-xl);
     border-radius: var(--radius-lg);
     margin-top: var(--space-xl);
     text-align: center;
+    background: linear-gradient(135deg, #FF6600 0%, #FF8C42 100%);
 }
 
 .lakota-title {
@@ -1725,7 +1806,7 @@ button {
 
 /* Correction partenaires */
 .partners-grid {
-    grid-template-columns: repeat(2, 1fr); /* Seulement 2 partenaires */
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .partner-logo {
@@ -1734,7 +1815,7 @@ button {
 }
 
 .partner-name {
-    display: none; /* Cache le texte si pas fourni */
+    display: none;
 }
 
 @media (min-width: 768px) {
@@ -1748,8 +1829,6 @@ button {
 }
 
 /* CORRECTIONS AMÉLIORÉES POUR LAKOTA */
-
-/* 1. Réduction de la hauteur de la section Lakota */
 .lakota-event {
     text-align: center;
     padding: 25px 20px;
@@ -1759,7 +1838,7 @@ button {
     margin-bottom: 40px;
     position: relative;
     overflow: hidden;
-    min-height: auto; /* Supprime la hauteur minimale fixe */
+    min-height: auto;
 }
 
 /* 2. Animation plus attrayante */
@@ -1863,8 +1942,8 @@ button {
 }
 
 .lakota-event .media-item {
-    width: 280px; /* Légèrement réduit */
-    height: 420px; /* Ratio maintenu mais réduit */
+    width: 280px;
+    height: 420px;
     max-width: 90%;
     animation: float 4s ease-in-out infinite 1s;
 }
@@ -1878,6 +1957,7 @@ button {
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     border: 3px solid white;
+    image-rendering: optimizeQuality;
 }
 
 /* 7. Bouton d'alerte stylisé */
@@ -2362,6 +2442,7 @@ textarea.form-input {
     display: block;
     border-radius: 10px;
     transition: transform 0.5s ease;
+    image-rendering: optimizeQuality;
 }
 
 .president-img:hover {
@@ -2968,6 +3049,7 @@ textarea.form-input {
     width: 100%;
     height: 120px;
     object-fit: cover;
+    image-rendering: optimizeQuality;
 }
 
 .thumbnail-caption {
@@ -3051,7 +3133,7 @@ textarea.form-input {
 }
 
 #forumGallery .media-item {
-    height: 320px !important; /* Hauteur fixe pour uniformité */
+    height: 320px !important;
     display: flex;
     flex-direction: column;
     border-radius: var(--radius-md);
@@ -3061,24 +3143,29 @@ textarea.form-input {
     cursor: pointer;
     background: var(--white);
     position: relative;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 #forumGallery .media-img {
     width: 100%;
-    height: 250px !important; /* Hauteur fixe pour l'image */
-    object-fit: cover !important; /* Remplit le conteneur sans déformation */
-    object-position: center center; /* Centre l'image, coupe les bords si nécessaire */
+    height: 250px !important;
+    object-fit: cover !important;
+    object-position: center center;
     transition: transform 0.3s ease;
+    image-rendering: optimizeQuality;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Pour les images très verticales, ajustez le positionnement */
 #forumGallery .media-img.portrait {
-    object-position: top center; /* Pour les portraits, alignez en haut */
+    object-position: top center;
 }
 
 /* Pour les images très horizontales (paysages) */
 #forumGallery .media-img.landscape {
-    object-position: center center;
+    object-position: center 25%;
 }
 
 #forumGallery .media-caption {
@@ -3151,6 +3238,7 @@ textarea.form-input {
     object-fit: contain;
     border-radius: 8px;
     background: #000;
+    image-rendering: optimizeQuality;
 }
 
 .image-modal .modal-caption {
@@ -3501,6 +3589,7 @@ button, .btn-accent, .btn-primary, .btn-outline, .btn-secondary,
     height: 140px;
     object-fit: cover;
     display: block;
+    image-rendering: optimizeQuality;
 }
 
 .cnts-caption {
@@ -3526,7 +3615,6 @@ button, .btn-accent, .btn-primary, .btn-outline, .btn-secondary,
     margin-top: 2rem;
     text-align: center;
 }
-
 
 /* Responsive pour la grille CNTS */
 @media (max-width: 768px) {
@@ -3567,4 +3655,165 @@ button, .btn-accent, .btn-primary, .btn-outline, .btn-secondary,
 
 .cnts-convention-section {
     animation: fadeInUp 0.8s ease-out;
+}
+
+/* ===========================================
+   ÉTIQUETTE "ESTIMATION 2025" POUR LES STATISTIQUES
+=========================================== */
+
+.estimation-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: rgba(255, 102, 0, 0.1);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+}
+
+/* Ajustement pour garder le même espacement */
+.stat-item {
+    text-align: center;
+    padding: var(--space-lg) var(--space-md);
+}
+
+.stat-number {
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+/* Pour mobile : garder horizontal mais ajuster */
+@media (max-width: 768px) {
+    .impact-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    .estimation-label {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+    
+    .stat-item {
+        padding: 15px 10px;
+    }
+}
+
+/* ===========================================
+   BOUTONS "VOIR PLUS" ÉLÉGANTS
+=========================================== */
+
+.see-more-container {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 25px;
+    position: relative;
+}
+
+.see-more-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.see-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.see-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.see-more-btn:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 102, 0, 0.2);
+}
+
+.see-more-btn:hover::before {
+    left: 0;
+}
+
+.see-more-btn:hover i {
+    transform: translateX(5px);
+}
+
+.see-more-btn i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+/* Effet de pulse subtil */
+@keyframes subtle-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.1);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 102, 0, 0);
+    }
+}
+
+.see-more-btn {
+    animation: subtle-pulse 2s infinite;
+}
+
+/* Version alternative avec fond coloré */
+.see-more-btn.accent {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.see-more-btn.accent:hover {
+    background: transparent;
+    color: var(--accent);
+}
+
+.see-more-btn.accent::before {
+    background: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .see-more-container {
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+    
+    .see-more-btn {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        width: auto;
+    }
 }
