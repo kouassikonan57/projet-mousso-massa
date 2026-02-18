@@ -1825,3 +1825,351 @@ function initializeHeroSlider() {
   // Initialiser
   initSlider();
 }
+
+// ===========================================
+// FONCTIONS POUR LA SECTION MAN
+// ===========================================
+
+// Fonction pour ouvrir le modal d'inscription pour Man
+function openManRegistration() {
+  const modal = document.createElement("div");
+  modal.className = "modal man-modal";
+  modal.innerHTML = `
+    <div class="modal-overlay"></div>
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i class="fas fa-bell" style="color: var(--primary); margin-right: 10px;"></i>
+          Être informé(e) de la caravane à Man
+        </h3>
+        <button class="modal-close man-close" aria-label="Fermer">✕</button>
+      </div>
+      <form action="submit.php" method="POST" class="modal-form" id="manNotificationForm">
+        <input type="hidden" name="type" value="man_notification">
+        <input type="hidden" name="city" value="Man">
+        
+        <div class="form-group">
+          <label class="form-label">Nom complet *</label>
+          <input type="text" name="name" class="form-input" placeholder="Votre nom complet" required>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Téléphone *</label>
+            <input type="tel" name="phone" class="form-input" placeholder="+225 ..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-input" placeholder="email@exemple.com">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Ville de résidence *</label>
+          <select name="residence_city" class="form-select" required>
+            <option value="">Sélectionner...</option>
+            <option value="Man">Man</option>
+            <option value="Danané">Danané</option>
+            <option value="Biankouma">Biankouma</option>
+            <option value="Zouan-Hounien">Zouan-Hounien</option>
+            <option value="Bangolo">Bangolo</option>
+            <option value="autre">Autre ville</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Je souhaite participer en tant que :</label>
+          <select name="participation_type" class="form-select">
+            <option value="donneur">Donneur de sang</option>
+            <option value="benevole">Bénévole</option>
+            <option value="sensibilisateur">Sensibilisateur</option>
+            <option value="simple_information">Simplement être informé(e)</option>
+          </select>
+        </div>
+        
+        <div class="form-check">
+          <input id="man-consent" name="consent" type="checkbox" class="checkbox" required>
+          <label for="man-consent" class="checkbox-label">
+            Je souhaite recevoir les informations sur la caravane de don de sang à Man
+          </label>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="btn-outline man-cancel">Annuler</button>
+          <button type="submit" class="btn-primary">
+            <i class="fas fa-bell"></i>
+            M'informer
+          </button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  document.body.style.overflow = "hidden";
+
+  setTimeout(() => {
+    modal.classList.add("show");
+  }, 10);
+
+  // Gestion de la fermeture
+  const closeBtn = modal.querySelector(".man-close");
+  const cancelBtn = modal.querySelector(".man-cancel");
+  const overlay = modal.querySelector(".modal-overlay");
+
+  const closeModal = function () {
+    modal.classList.remove("show");
+    setTimeout(() => {
+      if (modal.parentNode) {
+        modal.remove();
+      }
+      document.body.style.overflow = "";
+    }, 300);
+  };
+
+  closeBtn.addEventListener("click", closeModal);
+  cancelBtn.addEventListener("click", closeModal);
+  overlay.addEventListener("click", closeModal);
+
+  // Soumission du formulaire
+  const form = document.getElementById("manNotificationForm");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+    submitBtn.disabled = true;
+
+    fetch("submit.php", {
+      method: "POST",
+      body: new FormData(form),
+    })
+      .then((response) => {
+        if (response.redirected) {
+          window.location.href = response.url;
+        } else {
+          return response.text();
+        }
+      })
+      .then((data) => {
+        if (data) {
+          try {
+            const result = JSON.parse(data);
+            if (result.success) {
+              window.location.href = "merci-man.html";
+            } else {
+              alert("Une erreur est survenue. Veuillez réessayer.");
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
+            }
+          } catch (e) {
+            form.submit();
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+        form.submit();
+      });
+  });
+}
+
+// Fonction pour devenir bénévole à Man
+function openManVolunteer() {
+  const modal = document.createElement("div");
+  modal.className = "modal man-volunteer-modal";
+  modal.innerHTML = `
+    <div class="modal-overlay"></div>
+    <div class="modal-content" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i class="fas fa-hands-helping" style="color: var(--primary); margin-right: 10px;"></i>
+          Devenir bénévole pour la caravane de Man
+        </h3>
+        <button class="modal-close man-vol-close" aria-label="Fermer">✕</button>
+      </div>
+      <form action="submit.php" method="POST" class="modal-form" id="manVolunteerForm">
+        <input type="hidden" name="type" value="man_volunteer">
+        <input type="hidden" name="city" value="Man">
+        
+        <div class="form-group">
+          <label class="form-label">Nom complet *</label>
+          <input type="text" name="name" class="form-input" placeholder="Votre nom complet" required>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Téléphone *</label>
+            <input type="tel" name="phone" class="form-input" placeholder="+225 ..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-input" placeholder="email@exemple.com">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Profession</label>
+          <input type="text" name="profession" class="form-input" placeholder="Votre profession">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Compétences particulières</label>
+          <textarea name="skills" class="form-input" rows="2" placeholder="Médical, communication, logistique, animation..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Disponibilités</label>
+          <div class="availability-checkboxes">
+            <label class="checkbox-label">
+              <input type="checkbox" name="weekends" checked> Week-ends
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="weekdays"> Semaine
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="mornings"> Matins
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="afternoons"> Après-midis
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-check">
+          <input id="man-vol-consent" name="consent" type="checkbox" class="checkbox" required>
+          <label for="man-vol-consent" class="checkbox-label">
+            Je souhaite m'engager comme bénévole pour la caravane de don de sang à Man
+          </label>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="btn-outline man-vol-cancel">Annuler</button>
+          <button type="submit" class="btn-primary">
+            <i class="fas fa-heart"></i>
+            Devenir bénévole
+          </button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  document.body.style.overflow = "hidden";
+
+  setTimeout(() => {
+    modal.classList.add("show");
+  }, 10);
+
+  // Gestion de la fermeture
+  const closeBtn = modal.querySelector(".man-vol-close");
+  const cancelBtn = modal.querySelector(".man-vol-cancel");
+  const overlay = modal.querySelector(".modal-overlay");
+
+  const closeModal = function () {
+    modal.classList.remove("show");
+    setTimeout(() => {
+      if (modal.parentNode) {
+        modal.remove();
+      }
+      document.body.style.overflow = "";
+    }, 300);
+  };
+
+  closeBtn.addEventListener("click", closeModal);
+  cancelBtn.addEventListener("click", closeModal);
+  overlay.addEventListener("click", closeModal);
+
+  // Soumission du formulaire
+  const form = document.getElementById("manVolunteerForm");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+    submitBtn.disabled = true;
+
+    fetch("submit.php", {
+      method: "POST",
+      body: new FormData(form),
+    })
+      .then((response) => {
+        if (response.redirected) {
+          window.location.href = response.url;
+        } else {
+          return response.text();
+        }
+      })
+      .then((data) => {
+        if (data) {
+          try {
+            const result = JSON.parse(data);
+            if (result.success) {
+              window.location.href = "merci-benevole-man.html";
+            } else {
+              alert("Une erreur est survenue. Veuillez réessayer.");
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
+            }
+          } catch (e) {
+            form.submit();
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+        form.submit();
+      });
+  });
+}
+
+// Ajouter un écouteur pour les images de la section Man
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('man-main-image') || 
+      (e.target.parentElement && e.target.parentElement.classList.contains('man-main-image'))) {
+    // L'image principale est déjà gérée par la fonction openImageModal
+    // qui est définie globalement
+  }
+});
+
+// Assurez-vous que la fonction openImageModal existe (elle devrait déjà être définie)
+// Si ce n'est pas le cas, ajoutez cette fonction de secours
+if (typeof openImageModal !== 'function') {
+  window.openImageModal = function(img) {
+    let modal = document.querySelector('.image-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.className = 'image-modal';
+      modal.innerHTML = `
+        <span class="close-modal">&times;</span>
+        <img class="modal-image" src="" alt="">
+        <div class="modal-caption"></div>
+      `;
+      document.body.appendChild(modal);
+      
+      modal.querySelector('.close-modal').addEventListener('click', function() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+      
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    }
+    
+    const modalImg = modal.querySelector('.modal-image');
+    const modalCaption = modal.querySelector('.modal-caption');
+    
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    modalCaption.textContent = img.alt || '';
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+}

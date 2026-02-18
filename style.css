@@ -3817,3 +3817,591 @@ button, .btn-accent, .btn-primary, .btn-outline, .btn-secondary,
         width: auto;
     }
 }
+
+/* ===========================================
+   SECTION MAN - NOUVELLE SECTION ACTION
+=========================================== */
+.man-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0;
+}
+
+.man-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 102, 0, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.man-section::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(204, 0, 0, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.man-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Badge spécial */
+.man-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--primary);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 50px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 5px 20px rgba(255, 102, 0, 0.3);
+  animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 5px 20px rgba(255, 102, 0, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 102, 0, 0.4);
+  }
+}
+
+.man-badge i {
+  font-size: 1.2rem;
+}
+
+.man-section .section-title .highlight {
+  color: var(--primary);
+  position: relative;
+  display: inline-block;
+}
+
+.man-section .section-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 2px;
+}
+
+/* Contenu principal */
+.man-content {
+  margin-top: 40px;
+  gap: 40px;
+}
+
+/* Date de la rencontre */
+.meeting-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 102, 0, 0.1);
+  color: var(--primary);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 102, 0, 0.2);
+}
+
+.meeting-date i {
+  font-size: 1.1rem;
+}
+
+/* Sous-titre */
+.man-subtitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.man-subtitle small {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--primary);
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* Citation */
+.man-quote {
+  background: linear-gradient(135deg, rgba(255, 102, 0, 0.05) 0%, transparent 100%);
+  padding: 30px;
+  border-radius: 20px;
+  margin: 30px 0;
+  position: relative;
+  border-left: 4px solid var(--primary);
+}
+
+.man-quote i {
+  color: var(--primary);
+  font-size: 1.5rem;
+  opacity: 0.5;
+  margin-bottom: 15px;
+}
+
+.man-quote p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.man-quote footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.man-quote footer strong {
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.man-quote footer span {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Objectifs */
+.man-objectives {
+  margin: 35px 0;
+}
+
+.man-objectives h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.objectives-list {
+  list-style: none;
+  padding: 0;
+}
+
+.objectives-list li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.objectives-list li:last-child {
+  border-bottom: none;
+}
+
+.objectives-list li i {
+  width: 30px;
+  height: 30px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.objectives-list li span {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.objectives-list li strong {
+  color: var(--primary);
+}
+
+/* Engagements */
+.man-commitments {
+  display: grid;
+  gap: 20px;
+  margin: 35px 0;
+}
+
+.commitment-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.commitment-item:hover {
+  transform: translateX(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.commitment-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.commitment-text {
+  flex: 1;
+}
+
+.commitment-text strong {
+  display: block;
+  color: var(--primary);
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.commitment-text p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Boutons d'action */
+.man-buttons {
+  margin-top: 40px;
+}
+
+.man-buttons .btn-accent,
+.man-buttons .btn-outline {
+  padding: 15px 30px;
+  font-size: 1rem;
+}
+
+/* Images */
+.man-main-image {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  margin-bottom: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.man-main-image:hover {
+  transform: scale(1.02);
+}
+
+.man-main-image img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  image-rendering: optimizeQuality;
+}
+
+.man-main-image .image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  padding: 20px;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.man-main-image .image-caption i {
+  color: var(--primary);
+}
+
+/* Grille d'images */
+.man-images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.man-image-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.man-image-item:hover {
+  transform: translateY(-5px);
+}
+
+.man-image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.man-image-item:hover img {
+  transform: scale(1.1);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.man-image-item:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-overlay i {
+  color: white;
+  font-size: 1.5rem;
+  background: rgba(255, 102, 0, 0.8);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Mini carte */
+.man-map {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.man-map h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.map-mini {
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.map-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  background: rgba(255, 102, 0, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.map-note i {
+  color: var(--primary);
+}
+
+/* Section remerciement */
+.man-thanks {
+  margin-top: 60px;
+  padding: 40px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  border-radius: 30px;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.man-thanks::before {
+  content: '❤️';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  font-size: 150px;
+  opacity: 0.1;
+  transform: rotate(15deg);
+}
+
+.thanks-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.thanks-content i {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  animation: heartbeat 1.5s ease infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.thanks-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  font-style: italic;
+}
+
+.signature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signature strong {
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+}
+
+.signature span {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .man-content {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .man-subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .man-section {
+    padding: 3rem 0;
+  }
+  
+  .man-badge {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .man-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .man-quote {
+    padding: 20px;
+  }
+  
+  .man-quote p {
+    font-size: 1rem;
+  }
+  
+  .commitment-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .commitment-icon {
+    margin-bottom: 10px;
+  }
+  
+  .man-images-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .man-main-image img {
+    height: 250px;
+  }
+  
+  .man-buttons {
+    flex-direction: column;
+  }
+  
+  .man-thanks {
+    padding: 30px 20px;
+  }
+  
+  .thanks-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .meeting-date {
+    font-size: 0.85rem;
+    padding: 6px 15px;
+  }
+  
+  .objectives-list li {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .map-note {
+    flex-direction: column;
+    text-align: center;
+  }
+}
