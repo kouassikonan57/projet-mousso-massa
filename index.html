@@ -1720,6 +1720,91 @@
       </div>
     </div>
 
+    <!-- POPUP VIDÉO - JOURNÉE INTERNATIONALE DES FEMMES 2026 -->
+    <div id="videoPopup" class="video-popup">
+      <div class="video-popup-overlay"></div>
+      <div class="video-popup-content">
+        <button
+          class="video-popup-close"
+          id="closeVideoPopup"
+          aria-label="Fermer"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="video-popup-header">
+          <div class="video-popup-badge">
+            <i class="fas fa-crown"></i>
+            <span>Événement spécial</span>
+          </div>
+          <h3 class="video-popup-title">
+            Journée Internationale des Droits des Femmes
+          </h3>
+          <p class="video-popup-subtitle">
+            8 mars 2026 - L'ONG Moussos Massa célèbre la femme forte et
+            valeureuse
+          </p>
+        </div>
+
+        <div class="video-popup-player">
+          <!-- Conteneur vidéo avec extrait -->
+          <video
+            id="popupVideo"
+            class="popup-video"
+            poster="assets/images/8mars-2026-poster.jpg"
+            preload="metadata"
+            playsinline
+          >
+            <source src="assets/videos/8mars-2026.mp4" type="video/mp4" />
+            Votre navigateur ne supporte pas la lecture de vidéos.
+          </video>
+
+          <!-- Overlay de lecture personnalisé -->
+          <div class="video-custom-controls">
+            <button class="video-play-btn" id="videoPlayBtn">
+              <i class="fas fa-play"></i>
+            </button>
+          </div>
+
+          <!-- Progression bar pour l'extrait -->
+          <div class="video-progress-container">
+            <div class="video-progress-bar" id="videoProgress"></div>
+            <div class="video-time-indicator">
+              <span id="currentTime">0:00</span> /
+              <span id="duration">1:21</span>
+              <span class="extrait-badge">Extrait (15s)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-popup-footer">
+          <div class="video-quote">
+            <i class="fas fa-quote-left"></i>
+            <p>"Quand La Femme veut, elle peut"</p>
+          </div>
+
+          <div class="video-actions">
+            <a
+              href="https://vm.tiktok.com/ZNRarwkAp/"
+              target="_blank"
+              class="btn-tiktok"
+              id="watchFullVideo"
+            >
+              <i class="fab fa-tiktok"></i>
+              Voir l'intégralité sur TikTok
+            </a>
+            <button class="btn-remind" id="remindLater">
+              <i class="fas fa-clock"></i>
+              Me rappeler plus tard
+            </button>
+          </div>
+
+          <p class="video-hashtags">
+            #8Mars2026 #MoussosMassa #DroitsDesFemmes #QuandLaFemmeVeutEllePeut
+          </p>
+        </div>
+      </div>
+    </div>
     <!-- Small back-to-top -->
     <button id="toTop" class="back-to-top" aria-label="Remonter">
       <i class="fa-solid fa-arrow-up arrow-up"></i>

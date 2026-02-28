@@ -2173,3 +2173,211 @@ if (typeof openImageModal !== 'function') {
     document.body.style.overflow = 'hidden';
   };
 }
+
+// ===========================================
+// POPUP VIDÉO 8 MARS 2026 (SON ACTIVÉ SANS ICÔNE)
+// ===========================================
+
+function initializeVideoPopup() {
+  const videoPopup = document.getElementById('videoPopup');
+  const closeBtn = document.getElementById('closeVideoPopup');
+  const playBtn = document.getElementById('videoPlayBtn');
+  const video = document.getElementById('popupVideo');
+  const remindLater = document.getElementById('remindLater');
+  const progressBar = document.getElementById('videoProgress');
+  const currentTimeSpan = document.getElementById('currentTime');
+  const durationSpan = document.getElementById('duration');
+  
+  const EXTRAIT_DUREE = 15; // 15 secondes d'extrait
+  const VIDEO_COMPLETE_DUREE = 81; // 1 minute 21 = 81 secondes
+
+  if (!videoPopup || !video) return;
+
+  // Configuration de la vidéo - SON ACTIVÉ PAR DÉFAUT
+  video.muted = false; // SON ACTIVÉ (pas muet)
+  video.playsInline = true;
+  video.preload = 'auto';
+
+  // Afficher le popup après 2 secondes
+  setTimeout(() => {
+    showVideoPopup();
+  }, 2000);
+
+  // Fonction pour afficher le popup
+  function showVideoPopup() {
+    videoPopup.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Fonction pour fermer le popup
+  function closeVideoPopup() {
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+      if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+      if (progressBar) progressBar.style.width = '0%';
+      if (currentTimeSpan) currentTimeSpan.textContent = '0:00';
+    }
+    videoPopup.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Métadonnées chargées
+  video.addEventListener('loadedmetadata', function() {
+    if (durationSpan) {
+      durationSpan.textContent = '1:21';
+    }
+    video.currentTime = 0;
+  });
+
+  // Gestionnaire de lecture/pause
+  if (playBtn) {
+    playBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      
+      if (video.paused) {
+        // IMPORTANT : S'assurer que le son est activé à chaque lecture
+        video.muted = false;
+        video.play();
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        video.pause();
+        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
+  }
+
+  // Clic sur la vidéo
+  video.addEventListener('click', function() {
+    if (video.paused) {
+      // IMPORTANT : S'assurer que le son est activé à chaque lecture
+      video.muted = false;
+      video.play();
+      if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+      video.pause();
+      if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  });
+
+  // Mise à jour du temps et limitation à 15 secondes
+  video.addEventListener('timeupdate', function() {
+    // Mettre à jour la barre de progression
+    if (progressBar && currentTimeSpan) {
+      const progressPercent = (video.currentTime / VIDEO_COMPLETE_DUREE) * 100;
+      progressBar.style.width = progressPercent + '%';
+      
+      // Afficher le temps actuel
+      const minutes = Math.floor(video.currentTime / 60);
+      const seconds = Math.floor(video.currentTime % 60);
+      currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Limiter à 15 secondes
+    if (video.currentTime >= EXTRAIT_DUREE) {
+      video.pause();
+      video.currentTime = EXTRAIT_DUREE;
+      if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+      
+      // Afficher un message
+      showExtraitMessage();
+    }
+  });
+
+  // Fonction pour afficher un message quand l'extrait est terminé
+  function showExtraitMessage() {
+    // Supprimer l'ancien message s'il existe
+    const oldMessage = document.querySelector('.extrait-message');
+    if (oldMessage) oldMessage.remove();
+
+    const message = document.createElement('div');
+    message.className = 'extrait-message';
+    message.innerHTML = `
+      <i class="fas fa-info-circle"></i>
+      <span>Extrait terminé - Voir l'intégralité sur TikTok</span>
+    `;
+    
+    const player = document.querySelector('.video-popup-player');
+    if (player) {
+      player.appendChild(message);
+      setTimeout(() => {
+        if (message.parentNode) {
+          message.remove();
+        }
+      }, 3000);
+    }
+  }
+
+  // Style pour le message
+  const style = document.createElement('style');
+  style.textContent = `
+    .extrait-message {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 102, 0, 0.95);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: slideUp 0.3s ease;
+      z-index: 30;
+      white-space: nowrap;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Fermeture
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeVideoPopup);
+  }
+
+  // Rappel plus tard (ferme et réaffiche dans 2 heures)
+  if (remindLater) {
+    remindLater.addEventListener('click', function() {
+      closeVideoPopup();
+      
+      // Réafficher dans 2 heures
+      setTimeout(() => {
+        showVideoPopup();
+      }, 7200000); // 2 heures
+    });
+  }
+
+  // Clic sur l'overlay
+  const overlay = document.querySelector('.video-popup-overlay');
+  if (overlay) {
+    overlay.addEventListener('click', closeVideoPopup);
+  }
+
+  // Touche Echap
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && videoPopup.classList.contains('show')) {
+      closeVideoPopup();
+    }
+  });
+}
+
+// Initialiser au chargement
+document.addEventListener('DOMContentLoaded', function() {
+  // Petit délai pour être sûr que tout est chargé
+  setTimeout(() => {
+    initializeVideoPopup();
+  }, 500);
+});
